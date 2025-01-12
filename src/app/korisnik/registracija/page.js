@@ -47,7 +47,7 @@ export default function Home() {
       setPasswordValid(true);
     }
 
-    window.location.href = "/login";
+    window.location.href = "/korisnik/login";
   };
 
   const handleInput = (event, setFn) => {

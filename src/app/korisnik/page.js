@@ -288,7 +288,7 @@ export default function Home() {
       {/* date picker */}
       {tipVoznje === "Rezervacija" && (
         <>
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center z-10">
             <div className="flex space-x-4 p-4">
               <span className="bg-black text-yellow-500 px-4 py-2 rounded">
                 Datum:
@@ -393,7 +393,7 @@ export default function Home() {
       {stanje == 0 && (
         <div className="w-full flex justify-center">
           <div
-            className="my-4 tooltip tooltip-open tooltip-error tooltip-top"
+            className="my-4 tooltip tooltip-open tooltip-error tooltip-top z-0"
             data-tip="Naručivanje taxija plaćate sa 2 kredita"
           >
             <button className="btn btn-warning " onClick={stateToOne}>

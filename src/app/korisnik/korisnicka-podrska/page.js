@@ -50,9 +50,7 @@ export default function Home() {
       <>
         <div className="w-full flex justify-center">
           <Link href={currentUser.rola === "korisnik" ? "/korisnik" : "/taxi"}>
-            <button className="my-5 btn btn-warning">
-              Povratak na glavni ekran
-            </button>
+            <button className="my-5 btn btn-warning">Pošalji poruku</button>
           </Link>
         </div>
       </>
