@@ -24,7 +24,9 @@ export default function Home() {
   const [inputValid, setInputValid] = useState(true);
 
   const [statusTaxija, setStatusTaxija] = useState(
-    stanje == 2 ? "Taxi je prihvatio vožnju" : "Čeka se odgovor taxija"
+    stanje == 2 || stanje == 1.5
+      ? "Taxi je prihvatio vožnju"
+      : "Čeka se odgovor taxija"
   );
 
   const handleChangeDijeljenje = (event) => {
@@ -69,10 +71,10 @@ export default function Home() {
     setStanje(1);
 
     timeoutPrihvatanjeVoznje = setTimeout(() => {
-      localStorage.setItem("stanje", 2);
+      localStorage.setItem("stanje", 1.5);
 
       setStatusTaxija("Taxi je prihvatio vožnju");
-      setStanje(2);
+      setStanje(1.5);
     }, 3000);
   };
 
@@ -90,6 +92,11 @@ export default function Home() {
   const stateToPlacanje = () => {
     localStorage.setItem("stanje", 3);
     setStanje(3);
+  };
+
+  const stateToTwo = () => {
+    localStorage.setItem("stanje", 2);
+    setStanje(2);
   };
 
   // date picker
@@ -326,7 +333,7 @@ export default function Home() {
       )}
 
       {/* Status taxija */}
-      {(stanje == 2 || stanje == 1) && (
+      {(stanje == 2 || stanje == 1.5 || stanje == 1) && (
         <>
           <div className="w-full flex justify-center">
             <span className="bg-black text-yellow-500 px-4 py-2 rounded">
@@ -340,7 +347,7 @@ export default function Home() {
       )}
 
       {/* Reg. oznake */}
-      {stanje == 2 && (
+      {(stanje == 2 || stanje == 1.5) && (
         <div className="w-full flex justify-center py-4">
           <div className="flex p-2">
             <span className="bg-black text-yellow-500 px-2 py-2 rounded">
@@ -362,7 +369,7 @@ export default function Home() {
       )}
 
       {/* Procijenjeno vrijeme dolaska taxija */}
-      {stanje == 2 && tipVoznje == "Odmah" && (
+      {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
         <div className="w-full flex justify-center">
           <div className="flex space-x-2 p-2">
             <span className="bg-black text-yellow-500 px-4 py-2 rounded">
@@ -376,7 +383,7 @@ export default function Home() {
       )}
 
       {/* Procijenjeno vrijeme do odredišta */}
-      {stanje == 2 && tipVoznje == "Odmah" && (
+      {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
         <div className="w-full flex justify-center">
           <div className="flex space-x-4 p-4">
             <span className="bg-black text-yellow-500 px-4 py-2 rounded">
@@ -392,14 +399,9 @@ export default function Home() {
       {/* Naruci taxi button */}
       {stanje == 0 && (
         <div className="w-full flex justify-center">
-          <div
-            className="my-4 tooltip tooltip-open tooltip-error tooltip-top z-0"
-            data-tip="Naručivanje taxija plaćate sa 2 kredita"
-          >
-            <button className="btn btn-warning " onClick={stateToOne}>
-              Nađi taxi
-            </button>
-          </div>
+          <button className="btn btn-warning " onClick={stateToOne}>
+            Nađi taxi
+          </button>
         </div>
       )}
 
@@ -414,7 +416,26 @@ export default function Home() {
       {stanje == 1 && (
         <>
           <div className="w-full flex justify-center">
-            <button className="my-5 btn btn-warning " onClick={stateToZero}>
+            <button className="my-5 btn btn-error " onClick={stateToZero}>
+              Otkaži vožnju
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* Prihvati voznju konačno*/}
+      {stanje == 1.5 && (
+        <>
+          <div className="w-full flex justify-center">
+            <div
+              className="my-4 tooltip tooltip-open tooltip-error tooltip-bottom z-0"
+              data-tip="Prihvatanje vožnje plaćate sa 2 kredita"
+            >
+              <button className="my-5 btn btn-warning " onClick={stateToTwo}>
+                Prihvati vožnju
+              </button>
+            </div>
+            <button className="mx-5 my-9 btn btn-error " onClick={stateToZero}>
               Otkaži vožnju
             </button>
           </div>
@@ -441,6 +462,9 @@ export default function Home() {
               onClick={() => document.getElementById("my_modal_3").showModal()}
             >
               Završi vožnju
+            </button>
+            <button className="mx-5 my-5 btn btn-error " onClick={stateToZero}>
+              Otkaži taxi
             </button>
           </div>
           <dialog id="my_modal_3" className="modal">
@@ -476,7 +500,7 @@ export default function Home() {
       )}
 
       {/* Povratak na glavni ekran rezervacija */}
-      {stanje == 2 && tipVoznje == "Rezervacija" && (
+      {(stanje == 2 || stanje == 1.5) && tipVoznje == "Rezervacija" && (
         <div className="w-full flex justify-center">
           <Link href="/korisnik">
             <button className="my-5 btn btn-warning" onClick={handlePovratak}>
