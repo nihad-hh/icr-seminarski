@@ -81,7 +81,7 @@ const HomePage = () => {
   return (
     <>
       <Link href="/korisnik">
-        <button className="my-5 btn btn-warning">Back</button>
+        <button className="my-5 mx-5 btn btn-warning">Nazad</button>
       </Link>
       <div className="w-full flex justify-center h-12 my-2">
         <input

@@ -63,8 +63,8 @@ const HomePage = () => {
 
   return (
     <>
-      <Link href="/korisnik/taxi-trenutna-voznja">
-        <button className="my-5 btn btn-warning">Back</button>
+      <Link href="/korisnik">
+        <button className="my-5 mx-5 btn btn-warning">Nazad</button>
       </Link>
       <div
         style={{

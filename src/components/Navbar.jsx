@@ -8,7 +8,7 @@ export default function Navbar() {
   currentUser = JSON.parse(currentUser);
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 z-10">
       <div className="navbar-start">
         <div className="dropdown">
           <details className="dropdown">
@@ -32,24 +32,46 @@ export default function Navbar() {
             <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
               <li>
                 <Link
-                  href={currentUser.rola === "korisnik" ? "/korisnik" : "taxi"}
+                  href={currentUser.rola === "putnik" ? "/korisnik" : "/taxi"}
+                  onClick={() =>
+                    (window.location.href =
+                      currentUser.rola === "putnik" ? "/korisnik" : "/taxi")
+                  }
                 >
                   Glavni ekran
                 </Link>
               </li>
-              {currentUser.rola === "korisnik" && (
+              {currentUser.rola === "putnik" && (
                 <li>
-                  <Link href="/korisnik/putnik-profil">Profil</Link>
+                  <Link
+                    href="/korisnik/putnik-profil"
+                    onClick={() =>
+                      (window.location.href = "/korisnik/putnik-profil")
+                    }
+                  >
+                    Profil
+                  </Link>
                 </li>
               )}
 
               <li>
-                <Link href="/korisnik/korisnicka-podrska">
+                <Link
+                  href="/korisnik/korisnicka-podrska"
+                  onClick={() =>
+                    (window.location.href = "/korisnik/korisnicka-podrska")
+                  }
+                >
                   Korisnicka podrška
                 </Link>
               </li>
+
               <li>
-                <Link href="/korisnik/login">Odjavi se</Link>
+                <Link
+                  href="/korisnik/login"
+                  onClick={() => (window.location.href = "/korisnik/login")}
+                >
+                  Odjavi se
+                </Link>
               </li>
             </ul>
           </details>

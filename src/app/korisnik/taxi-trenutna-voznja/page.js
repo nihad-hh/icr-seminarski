@@ -33,7 +33,7 @@ export default function Home() {
           <span className="bg-black text-yellow-500 px-4 py-2 rounded">
             Adresa polazišta:
           </span>
-          <span className="bg-yellow-500 text-black px-4 py-2 rounded min-w-24">
+          <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32 text-yellow-500">
             {loadData("polaziste")}
           </span>
         </div>
@@ -44,7 +44,7 @@ export default function Home() {
           <span className="bg-black text-yellow-500 px-4 py-2 rounded">
             Adresa odredišta:
           </span>
-          <span className="bg-yellow-500 text-black px-4 py-2 rounded min-w-24">
+          <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32 text-yellow-500">
             {loadData("odrediste")}
           </span>
         </div>
@@ -64,7 +64,9 @@ export default function Home() {
             disabled={true}
             defaultChecked
           />
-          <label htmlFor="Ne">Ne</label>
+          <label className="text-yellow-500" htmlFor="Ne">
+            Ne
+          </label>
           <input
             type="radio"
             id="Da"
@@ -72,16 +74,18 @@ export default function Home() {
             className="radio radio-warning"
             disabled={true}
           />
-          <label htmlFor="Da">Da</label>
+          <label className="text-yellow-500" htmlFor="Da">
+            Da
+          </label>
         </div>
       </div>
       {/* Procijenjeno vrijeme dolaska taxija */}
       <div className="w-full flex justify-center">
-        <div className="flex space-x-4 p-4">
+        <div className="flex space-x-2 p-2">
           <span className="bg-black text-yellow-500 px-4 py-2 rounded">
             Procijenjeno vrijeme dolaska:
           </span>
-          <span className="bg-yellow-500 text-black px-4 py-2 rounded">
+          <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
             5 minuta
           </span>
         </div>
@@ -92,7 +96,7 @@ export default function Home() {
           <span className="bg-black text-yellow-500 px-4 py-2 rounded">
             Procijenjeno vrijeme do odredišta:
           </span>
-          <span className="bg-yellow-500 text-black px-4 py-2 rounded">
+          <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
             20 minuta
           </span>
         </div>
@@ -101,7 +105,7 @@ export default function Home() {
       <>
         <Link href="/taxi">
           <div className="w-full flex justify-center">
-            <button className="my-5 btn btn-warning ">Otkaži vožnju</button>
+            <button className="my-5 btn btn-error ">Otkaži vožnju</button>
           </div>
         </Link>
       </>

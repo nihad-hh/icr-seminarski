@@ -29,6 +29,15 @@ export default function Home() {
       : "Čeka se odgovor taxija"
   );
 
+  if (stanje == 1) {
+    timeoutPrihvatanjeVoznje = setTimeout(() => {
+      localStorage.setItem("stanje", 1.5);
+
+      setStatusTaxija("Taxi je prihvatio vožnju");
+      setStanje(1.5);
+    }, 3000);
+  }
+
   const handleChangeDijeljenje = (event) => {
     setDijeljenjeVoznje(event.target.value);
   };
@@ -77,16 +86,11 @@ export default function Home() {
       setStanje(1.5);
     }, 3000);
   };
-
+  ``;
   const stateToZero = () => {
     clearTimeout(timeoutPrihvatanjeVoznje);
     localStorage.setItem("stanje", 0);
     setStanje(0);
-  };
-
-  const stateToThree = () => {
-    localStorage.setItem("stanje", 0);
-    setStanje(3);
   };
 
   const stateToPlacanje = () => {
@@ -97,6 +101,10 @@ export default function Home() {
   const stateToTwo = () => {
     localStorage.setItem("stanje", 2);
     setStanje(2);
+
+    if (tipVoznje === "Odmah") {
+      setStatusTaxija("Taxi je krenuo prema vama");
+    }
   };
 
   // date picker
@@ -111,9 +119,9 @@ export default function Home() {
 
   const [odabirPlacanja, setOdabirPlacanja] = useState("keš");
 
-  const handleOdabirPlacanja = (event) => {
-    console.log(event.target.value);
-    setOdabirPlacanja(event.target.value);
+  const handleOdabirPlacanja = (nacinPlacanja) => {
+    setOdabirPlacanja(nacinPlacanja);
+    stateToPlacanje();
   };
 
   const handlePlacanje = () => {
@@ -346,23 +354,35 @@ export default function Home() {
         </>
       )}
 
-      {/* Reg. oznake */}
+      {/* Reg. oznake i cijena vožnje*/}
       {(stanje == 2 || stanje == 1.5) && (
         <div className="w-full flex justify-center py-4">
-          <div className="flex p-2">
-            <span className="bg-black text-yellow-500 px-2 py-2 rounded">
-              Reg. oznake:
-            </span>
-            <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-              A02-K-521
-            </span>
-          </div>
+          {tipVoznje == "Odmah" && (
+            <div className="flex p-2">
+              <span className="bg-black text-yellow-500 px-2 py-2 rounded">
+                Reg. oznake:
+              </span>
+              <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
+                A02-K-521
+              </span>
+            </div>
+          )}
+          {tipVoznje == "Rezervacija" && (
+            <div className="flex p-2">
+              <span className="bg-black text-yellow-500 px-2 py-2 rounded">
+                Trajanje vožnje:
+              </span>
+              <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
+                15 min
+              </span>
+            </div>
+          )}
           <div className="flex p-2">
             <span className="bg-black text-yellow-500 px-2 py-2 rounded">
               Procijenjena cijena:
             </span>
             <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-              15KM
+              21 KM
             </span>
           </div>
         </div>
@@ -467,31 +487,43 @@ export default function Home() {
               Otkaži taxi
             </button>
           </div>
-          <dialog id="my_modal_3" className="modal">
-            <div className="modal-box">
+          <dialog id="my_modal_3" className="modal ">
+            <div className="modal-box w-[450px]">
               <form method="dialog">
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                   ✕
                 </button>
               </form>
-              <span className="text-yellow-500 px-2 py-2 rounded">
-                Način plaćanja:
+              <span className="w-full flex justify-center text-yellow-500 px-2 py-2 rounded">
+                Odaberi način plaćanja:
               </span>
-              <select
-                className="select select-warning w-full max-w-xs"
-                defaultValue="Odaberi način plaćanja"
-                onChange={handleOdabirPlacanja}
-              >
-                <option value="keš">Keš</option>
-                <option value="krediti">Krediti u aplikaciji</option>
-                <option value="kartica">Kartica</option>
-              </select>
+
               <div className="w-full flex justify-center">
                 <button
-                  className="my-5 btn btn-warning"
-                  onClick={stateToPlacanje}
+                  className="my-5 mx-3 btn btn-success"
+                  onClick={() => {
+                    handleOdabirPlacanja("keš");
+                  }}
                 >
-                  Plati
+                  Keš
+                </button>
+
+                <button
+                  className="my-5 mx-3 btn btn-warning"
+                  onClick={() => {
+                    handleOdabirPlacanja("krediti");
+                  }}
+                >
+                  Krediti u aplikaciji
+                </button>
+
+                <button
+                  className="my-5 mx-3 btn btn-info"
+                  onClick={() => {
+                    handleOdabirPlacanja("kartica");
+                  }}
+                >
+                  Kartica
                 </button>
               </div>
             </div>
@@ -500,7 +532,7 @@ export default function Home() {
       )}
 
       {/* Povratak na glavni ekran rezervacija */}
-      {(stanje == 2 || stanje == 1.5) && tipVoznje == "Rezervacija" && (
+      {stanje == 2 && tipVoznje == "Rezervacija" && (
         <div className="w-full flex justify-center">
           <Link href="/korisnik">
             <button className="my-5 btn btn-warning" onClick={handlePovratak}>

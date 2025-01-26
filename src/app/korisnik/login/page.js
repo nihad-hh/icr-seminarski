@@ -24,7 +24,7 @@ let korisnici = [
     username: "Nihad Hodzic",
     password: "password123",
     krediti: "12",
-    rola: "korisnik",
+    rola: "putnik",
   },
   {
     email: "edin@gmail.com",
@@ -38,52 +38,50 @@ let korisnici = [
 let dostupneVoznje = [
   {
     id: "1",
-    datum: "27.12.2024",
+    datum: "13.02.2024",
     vrijeme: "15:00",
     polaziste: "Bulevar Meše Selimovića 12",
     odrediste: "Drvenija 13",
   },
   {
     id: "2",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
+    datum: "13.02.2025",
+    vrijeme: "11:25",
+    polaziste: "Trg nezavinosti 4",
+    odrediste: "Safeta Hadžića 13",
   },
   {
     id: "3",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
+    datum: "13.02.2024",
+    vrijeme: "21:13",
+    polaziste: "Enverha Šehovića 123",
+    odrediste: "Skenderija 1",
   },
   {
     id: "4",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
+    datum: "13.02.2024",
+    vrijeme: "13:25",
+    polaziste: "Humska 4",
+    odrediste: "Bolnička 12",
   },
 ];
 
 let rezervisaneVoznje = [
   {
     id: "1",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    datum: "27.03.2025",
+    vrijeme: "13:25",
+    polaziste: "Humska 4",
+    odrediste: "Bolnička 12",
+    cijena: "12 KM",
   },
   {
     id: "2",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    datum: "15.02.2025",
+    vrijeme: "21:13",
+    polaziste: "Enverha Šehovića 123",
+    odrediste: "Skenderija 1",
+    cijena: "23 KM",
   },
   {
     id: "3",
@@ -91,38 +89,34 @@ let rezervisaneVoznje = [
     vrijeme: "15:00",
     polaziste: "Bulevar Meše Selimovića 12",
     odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    cijena: "19 KM",
   },
   {
     id: "4",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    datum: "13.02.2025",
+    vrijeme: "11:25",
+    polaziste: "Trg nezavinosti 4",
+    odrediste: "Safeta Hadžića 13",
+    cijena: "9 KM",
   },
 ];
 
 let zavrseneVoznje = [
   {
     id: "1",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    datum: "27.03.2025",
+    vrijeme: "14:11",
+    polaziste: "Višnjik 13",
+    odrediste: "Trg Alije Izetbegovića 91",
+    cijena: "12 KM",
   },
   {
     id: "2",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    datum: "15.02.2025",
+    vrijeme: "21:49",
+    polaziste: "Gatačka 13",
+    odrediste: "Koldžina 53",
+    cijena: "10 KM",
   },
   {
     id: "3",
@@ -130,17 +124,15 @@ let zavrseneVoznje = [
     vrijeme: "15:00",
     polaziste: "Bulevar Meše Selimovića 12",
     odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    cijena: "22 KM",
   },
   {
     id: "4",
-    datum: "27.12.2024",
-    vrijeme: "15:00",
-    polaziste: "Bulevar Meše Selimovića 12",
-    odrediste: "Drvenija 13",
-    trajanje: "18 min",
-    cijena: "10KM",
+    datum: "13.02.2025",
+    vrijeme: "11:25",
+    polaziste: "Trg nezavinosti 4",
+    odrediste: "Safeta Hadžića 13",
+    cijena: "15 KM",
   },
 ];
 
@@ -156,6 +148,23 @@ export default function Home() {
   const [usernameValid, setUsernameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
 
+  let registriraniKorisnici = JSON.parse(
+    localStorage.getItem("registriraniKorisnici")
+  );
+
+  if (registriraniKorisnici) {
+    korisnici = korisnici.concat(registriraniKorisnici);
+
+    registriraniKorisnici = [];
+
+    localStorage.setItem(
+      "registriraniKorisnici",
+      JSON.stringify(registriraniKorisnici)
+    );
+
+    console.log(korisnici);
+  }
+
   const [users, setUsers] = useState(korisnici);
 
   // useEffect(() => {
@@ -168,7 +177,7 @@ export default function Home() {
   //     });
   // });
 
-  const handleRegistration = async () => {
+  const handleLogin = async () => {
     if (username === "") {
       setUsernameValid(false);
       return;
@@ -196,7 +205,7 @@ export default function Home() {
       localStorage.setItem("polaziste", "Najcesce polaziste");
       localStorage.setItem("odrediste", "Najcesce odrediste");
 
-      if (user.rola === "korisnik") {
+      if (user.rola === "putnik") {
         window.location.href = "/korisnik";
       } else if (user.rola === "taxi") {
         window.location.href = "/taxi";
@@ -280,7 +289,7 @@ export default function Home() {
           </span>
         </div>
         <div className="w-full flex justify-center">
-          <button className="my-5 btn btn-warning" onClick={handleRegistration}>
+          <button className="my-5 btn btn-warning" onClick={handleLogin}>
             Prijavi se
           </button>
         </div>

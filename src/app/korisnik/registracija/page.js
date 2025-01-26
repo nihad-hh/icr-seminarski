@@ -25,6 +25,8 @@ export default function Home() {
   const [usernameValid, setUsernameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
 
+  const [rola, setRola] = useState("putnik");
+
   const handleRegistration = () => {
     if (email === "") {
       setEmailValid(false);
@@ -47,12 +49,44 @@ export default function Home() {
       setPasswordValid(true);
     }
 
+    let noviKorisnik = {
+      email: email,
+      username: username,
+      password: password,
+      krediti: "0",
+      rola: rola,
+    };
+
+    let registriraniKorisnici = localStorage.getItem("registriraniKorisnici");
+
+    if (registriraniKorisnici) {
+      registriraniKorisnici = JSON.parse(
+        localStorage.getItem("registriraniKorisnici")
+      );
+    }
+    console.log(registriraniKorisnici);
+
+    if (!registriraniKorisnici) {
+      registriraniKorisnici = [];
+    }
+
+    registriraniKorisnici.push(noviKorisnik);
+
+    localStorage.setItem(
+      "registriraniKorisnici",
+      JSON.stringify(registriraniKorisnici)
+    );
+
     window.location.href = "/korisnik/login";
   };
 
   const handleInput = (event, setFn) => {
     event.preventDefault();
     setFn(event.target.value);
+  };
+
+  const handleChangeRola = (event) => {
+    setRola(event.target.value);
   };
 
   return (
@@ -148,6 +182,34 @@ export default function Home() {
                 Molimo unesite ispravnu lozinku.
               </span>
             )}
+
+            <div className="w-full flex justify-center py-2">
+              <div className="flex space-x-4 ">
+                <span className="bg-black text-white-500 rounded">
+                  Vrsta korisnika:
+                </span>
+
+                <input
+                  type="radio"
+                  name="radio-6"
+                  className="radio radio-warning"
+                  id="putnik"
+                  onChange={handleChangeRola}
+                  value="taxi"
+                  defaultChecked
+                />
+                <label htmlFor="putnik">Putnik</label>
+                <input
+                  type="radio"
+                  name="radio-6"
+                  value="taxi"
+                  className="radio radio-warning"
+                  id="taxi"
+                  onChange={handleChangeRola}
+                />
+                <label htmlFor="taxi">Taxi</label>
+              </div>
+            </div>
           </div>
         </div>
         <div className="w-full flex justify-center">

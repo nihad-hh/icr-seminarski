@@ -43,11 +43,11 @@ export const Map: React.FC<MapProps> = memo(({ center, locations }) => {
   };
 
   const mapMarkIcon = new Icon({
-    iconUrl: "/map-marker.png",
+    iconUrl: "/taxi.png",
     iconSize: [47, 55],
   });
   const mapMarkActiveIcon = new Icon({
-    iconUrl: "/active-map-marker.png",
+    iconUrl: "/taxi.png",
     iconSize: [57, 65],
   });
 
