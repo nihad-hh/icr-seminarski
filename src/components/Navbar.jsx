@@ -9,8 +9,10 @@ export default function Navbar() {
     currentUser = JSON.parse(currentUser);
   }
 
-  const handleLogOut = () => {
+  const handleLogOut = (event) => {
+    event.preventDefault();
     localStorage.setItem("stanje", 0);
+    window.location.href = "/korisnik/login";
   };
 
   return (

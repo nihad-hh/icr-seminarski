@@ -10,7 +10,7 @@ import { forwardRef } from "react";
 
 import ReactStars from "react-stars";
 
-let timeoutPrihvatanjeVoznje;
+let timeoutPrihvatanjeVoznje = null;
 
 export default function Home() {
   const stanjeFromLocal = localStorage.getItem("stanje");
@@ -28,15 +28,6 @@ export default function Home() {
       ? "Taxi je prihvatio vožnju"
       : "Čeka se odgovor taxija"
   );
-
-  if (stanje == 1) {
-    timeoutPrihvatanjeVoznje = setTimeout(() => {
-      localStorage.setItem("stanje", 1.5);
-
-      setStatusTaxija("Taxi je prihvatio vožnju");
-      setStanje(1.5);
-    }, 3000);
-  }
 
   const handleChangeDijeljenje = (event) => {
     setDijeljenjeVoznje(event.target.value);
@@ -61,16 +52,11 @@ export default function Home() {
   }
 
   const stateToOne = () => {
-    // let currentUser = localStorage.getItem("currentUser");
-
-    // currentUser = JSON.parse(currentUser);
-
     if (
       localStorage.getItem("polaziste") == '""' ||
       localStorage.getItem("odrediste") == '""' ||
       (tipVoznje === "Rezervacija" && vrijeme == "")
     ) {
-      console.log(localStorage.getItem("polaziste"));
       setInputValid(false);
       return;
     } else {
@@ -79,18 +65,23 @@ export default function Home() {
     localStorage.setItem("stanje", 1);
     setStanje(1);
 
-    timeoutPrihvatanjeVoznje = setTimeout(() => {
-      localStorage.setItem("stanje", 1.5);
-
-      setStatusTaxija("Taxi je prihvatio vožnju");
-      setStanje(1.5);
-    }, 3000);
+    if (!timeoutPrihvatanjeVoznje) {
+      timeoutPrihvatanjeVoznje = setTimeout(() => {
+        localStorage.setItem("stanje", 1.5);
+        setStatusTaxija("Taxi je prihvatio vožnju");
+        setStanje(1.5);
+      }, 5000);
+    }
   };
   ``;
   const stateToZero = () => {
-    clearTimeout(timeoutPrihvatanjeVoznje);
+    if (timeoutPrihvatanjeVoznje) {
+      clearTimeout(timeoutPrihvatanjeVoznje);
+      timeoutPrihvatanjeVoznje = null;
+    }
     localStorage.setItem("stanje", 0);
     setStanje(0);
+    setStatusTaxija("Čeka se odgovor taxija");
   };
 
   const stateToPlacanje = () => {
@@ -188,7 +179,7 @@ export default function Home() {
       console.log(initialLoad);
       document.getElementById("my_modal_4").showModal();
 
-      setInitalLoad(true);
+      setInitalLoad("true");
       localStorage.setItem("initialLoad", "true");
     }
   }, []);
@@ -198,7 +189,7 @@ export default function Home() {
     if (handledLocation === "false") {
       document.getElementById("my_modal_4").remove();
 
-      setHandledLocation(true);
+      setHandledLocation("true");
       localStorage.setItem("handledLocation", "true");
     }
   };
@@ -207,7 +198,7 @@ export default function Home() {
     if (handledLocation === "false") {
       document.getElementById("my_modal_4").remove();
 
-      setHandledLocation(true);
+      setHandledLocation("true");
       localStorage.setItem("handledLocation", "true");
     }
   };

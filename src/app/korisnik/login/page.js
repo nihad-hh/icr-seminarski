@@ -144,8 +144,11 @@ export default function Home() {
   localStorage.setItem("krediti", 12);
   localStorage.setItem("rezervisaneVoznje", JSON.stringify(rezervisaneVoznje));
   localStorage.setItem("zavrseneVoznje", JSON.stringify(zavrseneVoznje));
-  localStorage.setItem("initialLoad", "false");
-  localStorage.setItem("handledLocation", "false");
+
+  useEffect(() => {
+    localStorage.setItem("initialLoad", "false");
+    localStorage.setItem("handledLocation", "false");
+  }, []);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -275,6 +278,7 @@ export default function Home() {
               <input
                 type={isVisible ? "text" : "password"}
                 className="grow"
+                placeholder="Lozinka"
                 value={password}
                 onChange={(event) => handleInput(event, setPassword)}
               />
