@@ -12,6 +12,10 @@ const Map = dynamic(
 const HomePage = () => {
   const [location, setLocation] = useState([]);
 
+  const [rola, getRola] = useState(
+    JSON.parse(localStorage.getItem("currentUser")).rola
+  );
+
   const generateRandomNumber = () => {
     const min = -0.01;
     const max = 0.01;
@@ -63,7 +67,9 @@ const HomePage = () => {
 
   return (
     <>
-      <Link href="/korisnik">
+      <Link
+        href={rola === "taxi" ? "/korisnik/taxi-trenutna-voznja" : "/korisnik"}
+      >
         <button className="my-5 mx-5 btn btn-warning">Nazad</button>
       </Link>
       <div

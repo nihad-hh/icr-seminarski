@@ -16,6 +16,8 @@ import { useRouter } from "next/router";
 
 import { loadDataFromJson } from "../../../utils/utils.js";
 
+import { Eye, EyeOff } from "lucide-react";
+
 let timeoutPrihvatanjeVoznje;
 
 let korisnici = [
@@ -161,21 +163,9 @@ export default function Home() {
       "registriraniKorisnici",
       JSON.stringify(registriraniKorisnici)
     );
-
-    console.log(korisnici);
   }
 
   const [users, setUsers] = useState(korisnici);
-
-  // useEffect(() => {
-  //   let objectData = loadDataFromJson("korisnici");
-
-  //   objectData
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  // });
 
   const handleLogin = async () => {
     if (username === "") {
@@ -202,12 +192,14 @@ export default function Home() {
 
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
-      localStorage.setItem("polaziste", "Najcesce polaziste");
-      localStorage.setItem("odrediste", "Najcesce odrediste");
 
       if (user.rola === "putnik") {
+        localStorage.setItem("polaziste", "Najcesce polaziste");
+        localStorage.setItem("odrediste", "Najcesce odrediste");
         window.location.href = "/korisnik";
       } else if (user.rola === "taxi") {
+        localStorage.setItem("polaziste", "Hamze Hume 4");
+        localStorage.setItem("odrediste", "Skenderija 12");
         window.location.href = "/taxi";
       }
     } else {
@@ -219,6 +211,10 @@ export default function Home() {
     event.preventDefault();
     setFn(event.target.value);
   };
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
   return (
     <>
@@ -266,11 +262,26 @@ export default function Home() {
                 />
               </svg>
               <input
-                type="password"
+                type={isVisible ? "text" : "password"}
                 className="grow"
                 value={password}
                 onChange={(event) => handleInput(event, setPassword)}
               />
+
+              <button
+                className="relative hover:text-blue-500"
+                type="button"
+                onClick={toggleVisibility}
+                aria-label={isVisible ? "Hide password" : "Show password"}
+                aria-pressed={isVisible}
+                aria-controls="password"
+              >
+                {isVisible ? (
+                  <EyeOff size={20} aria-hidden="true" />
+                ) : (
+                  <Eye size={20} aria-hidden="true" />
+                )}
+              </button>
             </label>
 
             {!passwordValid && (

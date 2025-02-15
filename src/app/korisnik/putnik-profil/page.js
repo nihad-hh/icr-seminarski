@@ -4,8 +4,13 @@ import Navbar from "../../../components/Navbar.jsx";
 import Link from "next/link";
 
 import { loadDataFromJson, createVoznje } from "../../../utils/utils.js";
+import { useState } from "react";
 
 export default function PutnikProfil() {
+  const [ime, setIme] = useState(
+    JSON.parse(localStorage.getItem("currentUser")).username
+  );
+
   let krediti = localStorage.getItem("krediti");
 
   let zavrseneVoznje = JSON.parse(localStorage.getItem("zavrseneVoznje"));
@@ -29,9 +34,11 @@ export default function PutnikProfil() {
               <td>{row.odrediste}</td>
               <td>{row.cijena}</td>
               <td
-                onClick={() =>
-                  document.getElementById("my_modal_4").showModal()
-                }
+                onClick={(e) => {
+                  console.log(e.target.parentElement.parentElement);
+
+                  document.getElementById("my_modal_4").showModal();
+                }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +69,9 @@ export default function PutnikProfil() {
             <div className="w-full flex justify-center">
               <button
                 className="my-5 btn btn-warning"
-                onClick={() =>
-                  (window.location.href = "/korisnik/putnik-profil")
-                }
+                onClick={() => {
+                  window.location.href = "/korisnik/putnik-profil";
+                }}
               >
                 Potvrdi brisanje
               </button>
@@ -79,9 +86,29 @@ export default function PutnikProfil() {
     <div>
       <Navbar />
       <div className="w-full flex justify-center">
-        <div className="flex space-x-4 p-4">
+        <div className="flex space-x-4 px-4 py-6 text-yellow-500">
+          <svg
+            class="w-6 h-6 text-gray-800 dark:text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="rgb(255, 204, 0)"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
+            />
+          </svg>
+          <p>{ime} </p>
+        </div>
+        <div className="flex space-x-4 py-4">
           <span className="bg-black text-yellow-500 px-4 py-2 rounded">
-            Dostupni krediti:
+            Krediti:
           </span>
           <span className="border-2 border-yellow-500 px-4 py-2 rounded">
             {krediti} KM
@@ -95,6 +122,11 @@ export default function PutnikProfil() {
           </Link>
         </div>
       </div>
+
+      <div className="flex w-full flex-col h-6">
+        <div className="divider"></div>
+      </div>
+
       <h1 className="h-10 m-5 text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
         Prethodno završene vožnje:
       </h1>
@@ -115,7 +147,7 @@ export default function PutnikProfil() {
         Rezervisane vožnje:
       </h1>
       <div className="max-h-56 overflow-auto">
-        <table className="table table-pin-rows">
+        <table id="tRezervisaneVoznje" className="table table-pin-rows">
           <thead>
             <tr>
               <th>Datum i vrijeme</th>

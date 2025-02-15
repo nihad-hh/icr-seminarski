@@ -14,6 +14,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { forwardRef } from "react";
 import { useRouter } from "next/router";
 
+import { Eye, EyeOff } from "lucide-react";
+
 let timeoutPrihvatanjeVoznje;
 
 export default function Home() {
@@ -28,7 +30,14 @@ export default function Home() {
   const [rola, setRola] = useState("putnik");
 
   const handleRegistration = () => {
-    if (email === "") {
+    let regex = /\.[A-Za-z]+[A-Za-z]+/i;
+    let regexTrue = regex.test(email);
+    if (
+      email === "" ||
+      !email.includes("@") ||
+      !email.includes(".") ||
+      !regexTrue
+    ) {
       setEmailValid(false);
       return;
     } else {
@@ -64,7 +73,6 @@ export default function Home() {
         localStorage.getItem("registriraniKorisnici")
       );
     }
-    console.log(registriraniKorisnici);
 
     if (!registriraniKorisnici) {
       registriraniKorisnici = [];
@@ -88,6 +96,10 @@ export default function Home() {
   const handleChangeRola = (event) => {
     setRola(event.target.value);
   };
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
   return (
     <>
@@ -170,11 +182,26 @@ export default function Home() {
                 />
               </svg>
               <input
-                type="password"
+                type={isVisible ? "text" : "password"}
                 className="grow"
                 value={password}
                 onChange={(event) => handleInput(event, setPassword)}
               />
+
+              <button
+                className="relative hover:text-blue-500"
+                type="button"
+                onClick={toggleVisibility}
+                aria-label={isVisible ? "Hide password" : "Show password"}
+                aria-pressed={isVisible}
+                aria-controls="password"
+              >
+                {isVisible ? (
+                  <EyeOff size={20} aria-hidden="true" />
+                ) : (
+                  <Eye size={20} aria-hidden="true" />
+                )}
+              </button>
             </label>
 
             {!passwordValid && (
@@ -198,6 +225,7 @@ export default function Home() {
                   value="taxi"
                   defaultChecked
                 />
+
                 <label htmlFor="putnik">Putnik</label>
                 <input
                   type="radio"

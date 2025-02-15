@@ -49,7 +49,7 @@ export default function Home() {
       </div>
       <>
         <div className="w-full flex justify-center">
-          <Link href={currentUser.rola === "korisnik" ? "/korisnik" : "/taxi"}>
+          <Link href={currentUser.rola === "putnik" ? "/korisnik" : "/taxi"}>
             <button className="my-5 btn btn-warning">Pošalji poruku</button>
           </Link>
         </div>
