@@ -131,7 +131,7 @@ export default function PutnikProfil() {
         Prethodno završene vožnje:
       </h1>
       <div className="max-h-56 overflow-auto">
-        <table className="table table-pin-rows">
+        <table className="table table-pin-rows z-0">
           <thead>
             <tr>
               <th>Datum i vrijeme</th>
