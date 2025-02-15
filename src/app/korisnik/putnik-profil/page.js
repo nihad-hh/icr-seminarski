@@ -66,7 +66,28 @@ export default function PutnikProfil() {
                 ✕
               </button>
             </form>
-            <div className="w-full flex justify-center">
+            <div className="w-full flex justify-center flex-col">
+              <table className="table table-pin-rows z-0 my-6">
+                <thead>
+                  <tr>
+                    <th>Datum i vrijeme</th>
+                    <th>Polazište</th>
+                    <th>Odredište</th>
+                    <th>Cijena</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      27.3.2025. <br /> 13:25
+                    </td>
+                    <td>Humska 4</td>
+                    <td>Bolnička 12</td>
+                    <td>12 KM</td>
+                  </tr>
+                </tbody>
+              </table>
+
               <button
                 className="my-5 btn btn-warning"
                 onClick={() => {

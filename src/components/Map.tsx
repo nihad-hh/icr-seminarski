@@ -52,7 +52,7 @@ export const Map: React.FC<MapProps> = memo(({ center, locations }) => {
   });
 
   const mapManIcon = new Icon({
-    iconUrl: "/man.png",
+    iconUrl: "/man_slika.png",
     iconSize: [57, 65],
   });
 

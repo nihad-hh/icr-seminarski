@@ -41,7 +41,7 @@ let korisnici = [
 let dostupneVoznje = [
   {
     id: "1",
-    datum: "13.02.2024",
+    datum: "13.02.2025",
     vrijeme: "15:00",
     polaziste: "Bulevar Meše Selimovića 12",
     odrediste: "Drvenija 13",

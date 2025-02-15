@@ -78,7 +78,7 @@ export default function Navbar() {
 
               <li>
                 <Link
-                  href="/korisnik/korisnicka-podrska"
+                  href="/korisnik/faq"
                   onClick={() => (window.location.href = "/korisnik/faq")}
                 >
                   Često postavljena pitanja
