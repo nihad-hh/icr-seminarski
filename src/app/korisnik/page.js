@@ -2,7 +2,7 @@
 
 import Navbar from "../../components/Navbar";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -176,9 +176,74 @@ export default function Home() {
     setFn(event.target.value);
   };
 
+  const [initialLoad, setInitalLoad] = useState(
+    localStorage.getItem("initialLoad")
+  );
+  const [handledLocation, setHandledLocation] = useState(
+    localStorage.getItem("handledLocation")
+  );
+
+  useEffect(() => {
+    if (initialLoad === "false") {
+      console.log(initialLoad);
+      document.getElementById("my_modal_4").showModal();
+
+      setInitalLoad(true);
+      localStorage.setItem("initialLoad", "true");
+    }
+  }, []);
+
+  const handleDozvoliLokaciju = () => {
+    localStorage.setItem("polaziste", "Trenutna lokacija");
+    if (handledLocation === "false") {
+      document.getElementById("my_modal_4").remove();
+
+      setHandledLocation(true);
+      localStorage.setItem("handledLocation", "true");
+    }
+  };
+
+  const handleOdbijeLokaciju = () => {
+    if (handledLocation === "false") {
+      document.getElementById("my_modal_4").remove();
+
+      setHandledLocation(true);
+      localStorage.setItem("handledLocation", "true");
+    }
+  };
+
   return (
     <>
       <Navbar />
+      {/* allow location access  */}
+      <dialog id="my_modal_4" className="modal">
+        <div className="modal-box w-[450px]">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <span className="w-full flex justify-center text-yellow-500 px-2 py-2 rounded">
+            Aplikacija želi pristup vašoj lokaciji
+          </span>
+
+          <div className="w-full flex justify-center">
+            <button
+              className="my-5 mx-3 btn btn-success"
+              onClick={handleDozvoliLokaciju}
+            >
+              Dozvoli
+            </button>
+
+            <button
+              className="my-5 mx-3 btn btn-error"
+              onClick={handleOdbijeLokaciju}
+            >
+              Odbij
+            </button>
+          </div>
+        </div>
+      </dialog>
 
       {/* Odabir polazišta */}
       {stanje == 0 ? (
@@ -192,7 +257,6 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
-
       {/* Adresa polazišta */}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
@@ -206,7 +270,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* Odabir odredišta */}
       {stanje == 0 ? (
         <div className="w-full flex justify-center">
@@ -219,7 +282,6 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
-
       {/* Adresa odredišta */}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
@@ -233,7 +295,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* dijeljenje voznje */}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
@@ -264,7 +325,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* tip voznje */}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
@@ -299,7 +359,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* date picker */}
       {tipVoznje === "Rezervacija" && (
         <>
@@ -339,7 +398,6 @@ export default function Home() {
           </div>
         </>
       )}
-
       {/* Status taxija */}
       {(stanje == 2 || stanje == 1.5 || stanje == 1) && (
         <>
@@ -353,7 +411,6 @@ export default function Home() {
           </div>
         </>
       )}
-
       {/* Reg. oznake i cijena vožnje*/}
       {(stanje == 2 || stanje == 1.5) && (
         <div className="w-full flex justify-center py-4">
@@ -387,7 +444,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* Procijenjeno vrijeme dolaska taxija */}
       {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
         <div className="w-full flex justify-center">
@@ -401,7 +457,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* Procijenjeno vrijeme do odredišta */}
       {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
         <div className="w-full flex justify-center">
@@ -415,7 +470,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
       {/* Naruci taxi button */}
       {stanje == 0 && (
         <div className="w-full flex justify-center">
@@ -424,14 +478,12 @@ export default function Home() {
           </button>
         </div>
       )}
-
       {/* Tekst o neispravnom unosu */}
       {stanje == 0 && !inputValid && (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center py-4">
           <span className="text-red-500">Molimo unesite podatke.</span>
         </div>
       )}
-
       {/* Otkazi voznju */}
       {stanje == 1 && (
         <>
@@ -442,7 +494,6 @@ export default function Home() {
           </div>
         </>
       )}
-
       {/* Prihvati voznju konačno*/}
       {stanje == 1.5 && (
         <>
@@ -461,7 +512,6 @@ export default function Home() {
           </div>
         </>
       )}
-
       {/* Trenutna lokacija taxija button */}
       {stanje == 2 && tipVoznje == "Odmah" && (
         <div className="w-full flex justify-center">
@@ -472,7 +522,6 @@ export default function Home() {
           </Link>
         </div>
       )}
-
       {/* Zavrsi voznju i odabir placanja */}
       {stanje == 2 && tipVoznje == "Odmah" && (
         <>
@@ -530,7 +579,6 @@ export default function Home() {
           </dialog>
         </>
       )}
-
       {/* Povratak na glavni ekran rezervacija */}
       {stanje == 2 && tipVoznje == "Rezervacija" && (
         <div className="w-full flex justify-center">
@@ -541,7 +589,6 @@ export default function Home() {
           </Link>
         </div>
       )}
-
       {/* Feedback */}
       {stanje == 3 && (
         <>
@@ -556,14 +603,12 @@ export default function Home() {
           </div>
         </>
       )}
-
       {/* divider */}
       {stanje == 3 && (
         <div className="flex w-full flex-col">
           <div className="divider"></div>
         </div>
       )}
-
       {/* Plaćanje karticom */}
       {stanje == 3 && odabirPlacanja == "kartica" && (
         <>
@@ -645,7 +690,6 @@ export default function Home() {
           </div>
         </>
       )}
-
       {/* Plaćanje kešom ili kreditima */}
       {stanje == 3 &&
         (odabirPlacanja == "keš" || odabirPlacanja == "krediti") && (
@@ -665,21 +709,3 @@ export default function Home() {
     </>
   );
 }
-
-// const dataFilePath = path.join(process.cwd(), 'db/data.json');
-
-// const jsonData = await fsPromises.readFile(dataFilePath);
-// const objectData = JSON.parse(jsonData);
-
-// console.log(objectData);
-
-// const newData = {
-//   Name: "Ermina",
-//   ID: 2
-// };
-
-// objectData.push(newData)
-
-// const updatedData = JSON.stringify(objectData);
-
-// await fsPromises.writeFile(dataFilePath, updatedData);

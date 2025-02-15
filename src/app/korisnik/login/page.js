@@ -143,6 +143,8 @@ export default function Home() {
   localStorage.setItem("krediti", 12);
   localStorage.setItem("rezervisaneVoznje", JSON.stringify(rezervisaneVoznje));
   localStorage.setItem("zavrseneVoznje", JSON.stringify(zavrseneVoznje));
+  localStorage.setItem("initialLoad", "false");
+  localStorage.setItem("handledLocation", "false");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

@@ -126,9 +126,75 @@ export default function PutnikProfil() {
       </>
     );
   }
+
+  const [initialLoad, setInitalLoad] = useState(
+    localStorage.getItem("initialLoad")
+  );
+  const [handledLocation, setHandledLocation] = useState(
+    localStorage.getItem("handledLocation")
+  );
+
+  useEffect(() => {
+    if (initialLoad === "false") {
+      console.log(initialLoad);
+      document.getElementById("my_modal_5").showModal();
+
+      setInitalLoad(true);
+      localStorage.setItem("initialLoad", "true");
+    }
+  }, []);
+
+  const handleDozvoliLokaciju = () => {
+    localStorage.setItem("polaziste", "Trenutna lokacija");
+    if (handledLocation === "false") {
+      document.getElementById("my_modal_5").remove();
+
+      setHandledLocation(true);
+      localStorage.setItem("handledLocation", "true");
+    }
+  };
+
+  const handleOdbijeLokaciju = () => {
+    if (handledLocation === "false") {
+      document.getElementById("my_modal_5").remove();
+
+      setHandledLocation(true);
+      localStorage.setItem("handledLocation", "true");
+    }
+  };
   return (
     <div>
       <Navbar />
+
+      {/* allow location access  */}
+      <dialog id="my_modal_5" className="modal">
+        <div className="modal-box w-[450px]">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <span className="w-full flex justify-center text-yellow-500 px-2 py-2 rounded">
+            Aplikacija želi pristup vašoj lokaciji
+          </span>
+
+          <div className="w-full flex justify-center">
+            <button
+              className="my-5 mx-3 btn btn-success"
+              onClick={handleDozvoliLokaciju}
+            >
+              Dozvoli
+            </button>
+
+            <button
+              className="my-5 mx-3 btn btn-error"
+              onClick={handleOdbijeLokaciju}
+            >
+              Odbij
+            </button>
+          </div>
+        </div>
+      </dialog>
 
       <div className="w-full flex justify-center h-12">
         <div className="flex space-x-4 px-4 py-6 text-yellow-500">

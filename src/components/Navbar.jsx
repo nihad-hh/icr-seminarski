@@ -7,6 +7,10 @@ export default function Navbar() {
 
   currentUser = JSON.parse(currentUser);
 
+  const handleLogOut = () => {
+    localStorage.setItem("stanje", 0);
+  };
+
   return (
     <div className="navbar bg-base-100 z-10">
       <div className="navbar-start">
@@ -66,10 +70,7 @@ export default function Navbar() {
               </li>
 
               <li>
-                <Link
-                  href="/korisnik/login"
-                  onClick={() => (window.location.href = "/korisnik/login")}
-                >
+                <Link href="/korisnik/login" onClick={handleLogOut}>
                   Odjavi se
                 </Link>
               </li>
