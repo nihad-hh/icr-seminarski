@@ -61,9 +61,9 @@ export default function Home() {
   }
 
   const stateToOne = () => {
-    let currentUser = localStorage.getItem("currentUser");
+    // let currentUser = localStorage.getItem("currentUser");
 
-    currentUser = JSON.parse(currentUser);
+    // currentUser = JSON.parse(currentUser);
 
     if (
       localStorage.getItem("polaziste") == '""' ||
@@ -557,14 +557,18 @@ export default function Home() {
                   Keš
                 </button>
 
-                <button
-                  className="my-5 mx-3 btn btn-warning"
-                  onClick={() => {
-                    handleOdabirPlacanja("krediti");
-                  }}
-                >
-                  Krediti u aplikaciji
-                </button>
+                {localStorage.getItem("currentUser") === "None" ? (
+                  " "
+                ) : (
+                  <button
+                    className="my-5 mx-3 btn btn-warning"
+                    onClick={() => {
+                      handleOdabirPlacanja("krediti");
+                    }}
+                  >
+                    Krediti u aplikaciji
+                  </button>
+                )}
 
                 <button
                   className="my-5 mx-3 btn btn-info"

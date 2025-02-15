@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { loadDataFromJson } from "../../../utils/utils.js";
 
 import { Eye, EyeOff } from "lucide-react";
+import { eventNames } from "process";
 
 let timeoutPrihvatanjeVoznje;
 
@@ -218,6 +219,14 @@ export default function Home() {
 
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
+  const handleGuest = async (event) => {
+    event.preventDefault();
+
+    localStorage.setItem("currentUser", "None");
+
+    window.location.href = "/korisnik";
+  };
+
   return (
     <>
       <div className="h-full flex flex-col justify-center">
@@ -298,6 +307,14 @@ export default function Home() {
             Nemate račun ?{" "}
             <Link className="text-blue-500" href="/korisnik/registracija">
               Registrirajte se
+            </Link>{" "}
+            ili{" "}
+            <Link
+              className="text-blue-500"
+              href="/korisnik"
+              onClick={handleGuest}
+            >
+              Koristite kao gost
             </Link>
           </span>
         </div>

@@ -15,7 +15,9 @@ let timeoutPrihvatanjeVoznje;
 export default function Home() {
   let currentUser = localStorage.getItem("currentUser");
 
-  currentUser = JSON.parse(currentUser);
+  if (currentUser !== "None") {
+    currentUser = JSON.parse(currentUser);
+  }
 
   return (
     <>
@@ -49,7 +51,13 @@ export default function Home() {
       </div>
       <>
         <div className="w-full flex justify-center">
-          <Link href={currentUser.rola === "putnik" ? "/korisnik" : "/taxi"}>
+          <Link
+            href={
+              currentUser !== "None" && currentUser.rola === "taxi"
+                ? "/taxi"
+                : "/korisnik"
+            }
+          >
             <button className="my-5 btn btn-warning">Pošalji poruku</button>
           </Link>
         </div>

@@ -5,7 +5,9 @@ import Link from "next/link";
 export default function Navbar() {
   let currentUser = localStorage.getItem("currentUser");
 
-  currentUser = JSON.parse(currentUser);
+  if (currentUser != "None") {
+    currentUser = JSON.parse(currentUser);
+  }
 
   const handleLogOut = () => {
     localStorage.setItem("stanje", 0);
@@ -35,17 +37,22 @@ export default function Navbar() {
             </summary>
             <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
               <li>
-                <Link
-                  href={currentUser.rola === "putnik" ? "/korisnik" : "/taxi"}
-                  onClick={() =>
-                    (window.location.href =
-                      currentUser.rola === "putnik" ? "/korisnik" : "/taxi")
-                  }
-                >
-                  Glavni ekran
-                </Link>
+                {currentUser != "None" && (
+                  <Link
+                    href={currentUser.rola === "taxi" ? "/taxi" : "/korisnik"}
+                    onClick={() =>
+                      (window.location.href =
+                        currentUser.rola === "taxi" ? "/taxi" : "/korisnik")
+                    }
+                  >
+                    Glavni ekran
+                  </Link>
+                )}
+                {currentUser === "None" && (
+                  <Link href="/korisnik">Glavni ekran</Link>
+                )}
               </li>
-              {currentUser.rola === "putnik" && (
+              {currentUser != "None" && currentUser.rola === "putnik" && (
                 <li>
                   <Link
                     href="/korisnik/putnik-profil"
@@ -70,8 +77,17 @@ export default function Navbar() {
               </li>
 
               <li>
+                <Link
+                  href="/korisnik/korisnicka-podrska"
+                  onClick={() => (window.location.href = "/korisnik/faq")}
+                >
+                  Često postavljena pitanja
+                </Link>
+              </li>
+
+              <li>
                 <Link href="/korisnik/login" onClick={handleLogOut}>
-                  Odjavi se
+                  {currentUser === "None" ? "Prijavi se" : "Odjavi se"}
                 </Link>
               </li>
             </ul>
