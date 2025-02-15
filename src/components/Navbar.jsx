@@ -86,6 +86,15 @@ export default function Navbar() {
               </li>
 
               <li>
+                <Link
+                  href="/korisnik/about"
+                  onClick={() => (window.location.href = "/korisnik/about")}
+                >
+                  O nama
+                </Link>
+              </li>
+
+              <li>
                 <Link href="/korisnik/login" onClick={handleLogOut}>
                   {currentUser === "None" ? "Prijavi se" : "Odjavi se"}
                 </Link>
