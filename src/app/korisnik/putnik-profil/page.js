@@ -94,7 +94,7 @@ export default function PutnikProfil() {
                   window.location.href = "/korisnik/putnik-profil";
                 }}
               >
-                Potvrdi brisanje
+                Potvrdi otkazivanje
               </button>
             </div>
           </div>
@@ -175,7 +175,7 @@ export default function PutnikProfil() {
               <th>Polazište</th>
               <th>Odredište</th>
               <th>Cijena</th>
-              <th>Izbriši</th>
+              <th>Otkaži</th>
             </tr>
           </thead>
           {rezervisaneVoznjeJSX}

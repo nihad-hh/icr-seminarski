@@ -232,7 +232,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="h-full flex flex-col justify-center">
+      <div className="h-full flex flex-col justify-center items-center">
         <div className="w-full flex justify-center">
           <div className="flex flex-col w-96 gap-6">
             <div className="w-full flex justify-center">

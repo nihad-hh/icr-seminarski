@@ -64,7 +64,7 @@ const HomePage = () => {
   return (
     <>
       <Link href="/korisnik">
-        <button className="my-5 btn btn-warning">Back</button>
+        <button className="my-5 btn btn-warning">Nazad</button>
       </Link>
       <div
         style={{

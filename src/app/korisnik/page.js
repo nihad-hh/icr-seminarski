@@ -108,7 +108,7 @@ export default function Home() {
     )
   );
 
-  const [odabirPlacanja, setOdabirPlacanja] = useState("keš");
+  const [odabirPlacanja, setOdabirPlacanja] = useState("gotovina");
 
   const handleOdabirPlacanja = (nacinPlacanja) => {
     setOdabirPlacanja(nacinPlacanja);
@@ -215,19 +215,19 @@ export default function Home() {
             </button>
           </form>
           <span className="w-full flex justify-center text-yellow-500 px-2 py-2 rounded">
-            Aplikacija želi pristup vašoj lokaciji
+            Aplikacija želi pristup lokaciji na Vašem uređaju
           </span>
 
           <div className="w-full flex justify-center">
             <button
-              className="my-5 mx-3 btn btn-success"
+              className="my-5 mx-3 btn btn-warning"
               onClick={handleDozvoliLokaciju}
             >
               Dozvoli
             </button>
 
             <button
-              className="my-5 mx-3 btn btn-error"
+              className="my-5 mx-3 btn btn-warning"
               onClick={handleOdbijeLokaciju}
             >
               Odbij
@@ -248,12 +248,13 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
+
       {/* Adresa polazišta */}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
           <div className="flex space-x-4 p-4">
             <span className="bg-black text-yellow-500 px-4 py-2 rounded">
-              Adresa polazišta:
+              Polazište:
             </span>
             <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32">
               {loadData("polaziste")}
@@ -278,12 +279,21 @@ export default function Home() {
         <div className="w-full flex justify-center">
           <div className="flex space-x-4 p-4">
             <span className="bg-black text-yellow-500 px-4 py-2 rounded">
-              Adresa odredišta:
+              Odredište:
             </span>
-            <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32">
+            <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32 max-w-48 text-wrap">
               {loadData("odrediste")}
             </span>
           </div>
+          {stanje == 2 && (
+            <Link
+              href={{
+                pathname: "/korisnik/odrediste",
+              }}
+            >
+              <button className="my-4 btn btn-warning ">Promijeni</button>
+            </Link>
+          )}
         </div>
       )}
       {/* dijeljenje voznje */}
@@ -542,10 +552,10 @@ export default function Home() {
                 <button
                   className="my-5 mx-3 btn btn-success"
                   onClick={() => {
-                    handleOdabirPlacanja("keš");
+                    handleOdabirPlacanja("gotovina");
                   }}
                 >
-                  Keš
+                  Gotovina
                 </button>
 
                 {localStorage.getItem("currentUser") === "None" ? (
@@ -685,9 +695,9 @@ export default function Home() {
           </div>
         </>
       )}
-      {/* Plaćanje kešom ili kreditima */}
+      {/* Plaćanje gotovinom ili kreditima */}
       {stanje == 3 &&
-        (odabirPlacanja == "keš" || odabirPlacanja == "krediti") && (
+        (odabirPlacanja == "gotovina" || odabirPlacanja == "krediti") && (
           <>
             <div className="w-full flex justify-center">
               <Link href="/korisnik">

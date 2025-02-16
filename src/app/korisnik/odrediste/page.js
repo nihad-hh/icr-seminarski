@@ -10,6 +10,9 @@ const Map = dynamic(
 );
 
 const HomePage = () => {
+  const [stanje, setStanje] = useState(localStorage.getItem("stanje"));
+  const [ispravanUnos, setIspravanUnos] = useState(true);
+
   const [location, setLocation] = useState({});
 
   const generateRandomNumber = () => {
@@ -49,33 +52,30 @@ const HomePage = () => {
     return () => clearTimeout(timeoutId);
   }, [inputValue]);
 
-  const handleClick = (event) => {
-    if (event.key === "Enter") {
-      console.log("Enter pressed with value:", inputValue);
-      performAction(inputValue);
-    }
-  };
-
   const handleOnChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const performAction = (value) => {
-    const lat_step = generateRandomNumber();
-    const lng_step = generateRandomNumber();
+  const performAction = (event) => {
+    event.preventDefault();
+    if (stanje === "2" && inputValue.length < 5) {
+      setIspravanUnos(false);
+    } else {
+      setIspravanUnos(true);
 
-    const newLat = location["lat"] + lat_step;
-    const newLng = location["lng"] + lng_step;
+      const lat_step = generateRandomNumber();
+      const lng_step = generateRandomNumber();
 
-    console.log(newLat);
-    console.log(newLng);
+      const newLat = location["lat"] + lat_step;
+      const newLng = location["lng"] + lng_step;
 
-    setLocation({ id: location["id"], lat: newLat, lng: newLng });
+      setLocation({ id: location["id"], lat: newLat, lng: newLng });
 
-    localStorage.setItem("odrediste", JSON.stringify(inputValue));
-    window.location.href = "/korisnik";
+      localStorage.setItem("odrediste", JSON.stringify(inputValue));
+      window.location.href = "/korisnik";
 
-    setInputValue("");
+      setInputValue("");
+    }
   };
 
   return (
@@ -88,7 +88,7 @@ const HomePage = () => {
           className="border-2 border-yellow-500 mx-4 rounded-lg"
           type="text"
           value={inputValue}
-          onChange={handleOnChange} // Update state with input value
+          onChange={handleOnChange}
           placeholder="Unesi adresu"
         />
         <Link href="/korisnik">
@@ -97,6 +97,12 @@ const HomePage = () => {
           </button>
         </Link>
       </div>
+
+      {!ispravanUnos && (
+        <div className="w-full flex justify-center h-12 my-2">
+          <span className="text-red-500">Molimo unesite ispravnu adresu.</span>
+        </div>
+      )}
       <div
         style={{
           display: "flex",

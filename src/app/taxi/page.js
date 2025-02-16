@@ -156,7 +156,7 @@ export default function PutnikProfil() {
                 className="my-5 btn btn-warning"
                 onClick={() => (window.location.href = "/taxi")}
               >
-                Potvrdi brisanje
+                Potvrdi otkazivanje
               </button>
             </div>
           </div>
@@ -218,14 +218,14 @@ export default function PutnikProfil() {
 
           <div className="w-full flex justify-center">
             <button
-              className="my-5 mx-3 btn btn-success"
+              className="my-5 mx-3 btn btn-warning"
               onClick={handleDozvoliLokaciju}
             >
               Dozvoli
             </button>
 
             <button
-              className="my-5 mx-3 btn btn-error"
+              className="my-5 mx-3 btn btn-warning"
               onClick={handleOdbijeLokaciju}
             >
               Odbij
@@ -292,7 +292,7 @@ export default function PutnikProfil() {
               <th>Polazište</th>
               <th>Odredište</th>
               <th>Cijena</th>
-              <th className="w-[40px]">Izbriši</th>
+              <th className="w-[40px]">Otkaži</th>
               <th></th>
             </tr>
           </thead>

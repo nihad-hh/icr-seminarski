@@ -43,7 +43,7 @@ export default function Home() {
       <div className="w-full flex justify-start my-4 mx-2">
         <span className="text-yellow-500 px-2 py-2 rounded">Tekst:</span>
       </div>
-      <div className="flex w-128  flex-col mx-2">
+      <div className="flex min-w-[480px] flex-col mx-2">
         <textarea
           className="textarea textarea-warning h-64"
           placeholder="Ono što želim da podijelim"
