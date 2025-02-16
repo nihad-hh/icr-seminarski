@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="flex items-center justify-center flex-col bg-black min-h-[820px]">
+        <div className="flex bg-black min-h-screen">
           <div className="w-[500px] min-h-[820px] border-4 border-yellow-500 mx-auto">
             {children}
           </div>

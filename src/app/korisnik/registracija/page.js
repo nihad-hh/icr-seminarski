@@ -185,6 +185,7 @@ export default function Home() {
                 type={isVisible ? "text" : "password"}
                 className="grow"
                 value={password}
+                placeholder="Lozinka"
                 onChange={(event) => handleInput(event, setPassword)}
               />
 
