@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { MdOutlineClose } from "react-icons/md";
+import { CircleX } from "lucide-react";
 
 const Map = dynamic(
   () => import("../../../components/Map").then((component) => component.Map),
@@ -69,20 +69,29 @@ const HomePage = () => {
     setInputValue("");
   };
 
+  const handleClear = () => {
+    setInputValue("");
+  };
+
   return (
     <>
       <Link href="/korisnik">
         <button className="my-5 mx-5 btn btn-warning">Nazad</button>
       </Link>
       <div className="w-full flex justify-center h-12 my-2">
-        <input
-          className="border-2 border-yellow-500 mx-4 rounded-lg"
-          type="text"
-          value={inputValue}
-          onChange={handleOnChange} // Update state with input value
-          placeholder="Unesi adresu"
-        />
-        <MdOutlineClose />
+        <label className="input input-bordered flex items-center mx-2">
+          <input
+            className="grow"
+            type="text"
+            value={inputValue}
+            onChange={handleOnChange} // Update state with input value
+            placeholder="Unesi adresu"
+          />
+          <CircleX onClick={handleClear} />
+        </label>
+
+        <div className="flex justify-center items-center"></div>
+
         <Link href="/korisnik">
           <button className="btn btn-warning" onClick={performAction}>
             Potvrdi

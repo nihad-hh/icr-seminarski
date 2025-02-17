@@ -1,23 +1,11 @@
 "use client";
 
-import path from "path";
-
-import { MapContainer } from "react-leaflet/MapContainer";
-import { TileLayer } from "react-leaflet/TileLayer";
-import { useMap } from "react-leaflet/hooks";
-import Navbar from "../../../components/Navbar.jsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { forwardRef } from "react";
-import { useRouter } from "next/router";
-
-import { loadDataFromJson } from "../../../utils/utils.js";
 
 import { Eye, EyeOff } from "lucide-react";
-import { eventNames } from "process";
 
 let timeoutPrihvatanjeVoznje;
 

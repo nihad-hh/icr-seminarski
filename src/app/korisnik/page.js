@@ -10,8 +10,6 @@ import { forwardRef } from "react";
 
 import ReactStars from "react-stars";
 
-import { BsArrowRight } from "react-icons/bs";
-
 let timeoutPrihvatanjeVoznje = null;
 
 export default function Home() {
@@ -178,7 +176,6 @@ export default function Home() {
 
   useEffect(() => {
     if (initialLoad === "false") {
-      console.log(initialLoad);
       document.getElementById("my_modal_4").showModal();
 
       setInitalLoad("true");
@@ -189,19 +186,25 @@ export default function Home() {
   const handleDozvoliLokaciju = () => {
     localStorage.setItem("polaziste", "Trenutna lokacija");
     if (handledLocation === "false") {
-      document.getElementById("my_modal_4").remove();
-
-      setHandledLocation("true");
-      localStorage.setItem("handledLocation", "true");
+      console.log("Vani");
+      if (document.getElementById("my_modal_4")) {
+        console.log("Usao");
+        document.getElementById("my_modal_4").removeChild();
+        setHandledLocation("true");
+        localStorage.setItem("handledLocation", "true");
+      }
     }
   };
 
   const handleOdbijeLokaciju = () => {
     if (handledLocation === "false") {
-      document.getElementById("my_modal_4").remove();
-
-      setHandledLocation("true");
-      localStorage.setItem("handledLocation", "true");
+      console.log("Vani");
+      if (document.getElementById("my_modal_4")) {
+        console.log("Usao");
+        document.getElementById("my_modal_4").removeChild();
+        setHandledLocation("true");
+        localStorage.setItem("handledLocation", "true");
+      }
     }
   };
 
@@ -221,80 +224,25 @@ export default function Home() {
           </span>
 
           <div className="w-full flex justify-center">
-            <button
-              className="my-5 mx-3 btn btn-warning"
-              onClick={handleDozvoliLokaciju}
-            >
-              Dozvoli
-            </button>
-
-            <button
-              className="my-5 mx-3 btn btn-warning"
-              onClick={handleOdbijeLokaciju}
-            >
-              Odbij
-            </button>
+            <form method="dialog">
+              <button
+                className="my-5 mx-3 btn btn-warning"
+                // onClick={handleDozvoliLokaciju}
+              >
+                Dozvoli
+              </button>
+            </form>
+            <form method="dialog">
+              <button
+                className="my-5 mx-3 btn btn-warning"
+                // onClick={handleOdbijeLokaciju}
+              >
+                Odbij
+              </button>
+            </form>
           </div>
         </div>
       </dialog>
-
-      <div className="flex justify-center py-8">
-        <span
-          className={
-            stanje == 0 || stanje == 1
-              ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
-              : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
-          }
-        >
-          Naručivanje
-        </span>
-        <span>&nbsp;&nbsp;</span>
-        <span className="py-2">
-          <BsArrowRight />
-        </span>
-        <span>&nbsp;&nbsp;</span>
-        <span
-          className={
-            stanje == 1.5
-              ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
-              : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
-          }
-        >
-          Potvrda
-        </span>
-        <span>&nbsp;&nbsp;</span>
-        <span className="py-2">
-          <BsArrowRight />
-        </span>
-        <span>&nbsp;&nbsp;</span>
-        <span
-          className={
-            stanje == 2
-              ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
-              : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
-          }
-        >
-          Vožnja
-        </span>
-        {tipVoznje == "Odmah" && (
-          <>
-            <span>&nbsp;&nbsp;</span>
-            <span className="py-2">
-              <BsArrowRight />
-            </span>
-            <span>&nbsp;&nbsp;</span>
-            <span
-              className={
-                stanje == 3
-                  ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
-                  : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
-              }
-            >
-              Plaćanje
-            </span>
-          </>
-        )}
-      </div>
 
       {/* Odabir polazišta */}
       {stanje == 0 ? (
@@ -334,7 +282,7 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
-      {/* Adresa odredišta i button promijeni odrdište*/}
+      {/* Adresa odredišta */}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
           <div className="flex space-x-4 p-4">
@@ -345,7 +293,7 @@ export default function Home() {
               {loadData("odrediste")}
             </span>
           </div>
-          {stanje == 2 && tipVoznje == "Odmah" && (
+          {stanje == 2 && (
             <Link
               href={{
                 pathname: "/korisnik/odrediste",
