@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { MdOutlineClose } from "react-icons/md";
+
 const Map = dynamic(
   () => import("../../../components/Map").then((component) => component.Map),
   { ssr: false }
@@ -80,6 +82,7 @@ const HomePage = () => {
           onChange={handleOnChange} // Update state with input value
           placeholder="Unesi adresu"
         />
+        <MdOutlineClose />
         <Link href="/korisnik">
           <button className="btn btn-warning" onClick={performAction}>
             Potvrdi
@@ -92,7 +95,7 @@ const HomePage = () => {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          height: "600px",
+          maxHeight: "70%",
           width: "100%",
         }}
       >

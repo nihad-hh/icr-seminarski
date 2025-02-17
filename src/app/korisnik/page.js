@@ -10,6 +10,8 @@ import { forwardRef } from "react";
 
 import ReactStars from "react-stars";
 
+import { BsArrowRight } from "react-icons/bs";
+
 let timeoutPrihvatanjeVoznje = null;
 
 export default function Home() {
@@ -236,6 +238,64 @@ export default function Home() {
         </div>
       </dialog>
 
+      <div className="flex justify-center py-8">
+        <span
+          className={
+            stanje == 0 || stanje == 1
+              ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
+              : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
+          }
+        >
+          Naručivanje
+        </span>
+        <span>&nbsp;&nbsp;</span>
+        <span className="py-2">
+          <BsArrowRight />
+        </span>
+        <span>&nbsp;&nbsp;</span>
+        <span
+          className={
+            stanje == 1.5
+              ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
+              : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
+          }
+        >
+          Potvrda
+        </span>
+        <span>&nbsp;&nbsp;</span>
+        <span className="py-2">
+          <BsArrowRight />
+        </span>
+        <span>&nbsp;&nbsp;</span>
+        <span
+          className={
+            stanje == 2
+              ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
+              : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
+          }
+        >
+          Vožnja
+        </span>
+        {tipVoznje == "Odmah" && (
+          <>
+            <span>&nbsp;&nbsp;</span>
+            <span className="py-2">
+              <BsArrowRight />
+            </span>
+            <span>&nbsp;&nbsp;</span>
+            <span
+              className={
+                stanje == 3
+                  ? "flex justify-center items-center rounded px-2 border-2 text-yellow-500 border-yellow-500"
+                  : "flex justify-center items-center rounded px-2 border-2 text-gray-500 border-gray-500"
+              }
+            >
+              Plaćanje
+            </span>
+          </>
+        )}
+      </div>
+
       {/* Odabir polazišta */}
       {stanje == 0 ? (
         <div className="w-full flex justify-center">
@@ -274,7 +334,7 @@ export default function Home() {
           </Link>
         </div>
       ) : null}
-      {/* Adresa odredišta */}
+      {/* Adresa odredišta i button promijeni odrdište*/}
       {stanje < 3 && (
         <div className="w-full flex justify-center">
           <div className="flex space-x-4 p-4">
@@ -285,7 +345,7 @@ export default function Home() {
               {loadData("odrediste")}
             </span>
           </div>
-          {stanje == 2 && (
+          {stanje == 2 && tipVoznje == "Odmah" && (
             <Link
               href={{
                 pathname: "/korisnik/odrediste",

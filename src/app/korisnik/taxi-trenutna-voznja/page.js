@@ -126,21 +126,3 @@ export default function Home() {
     </>
   );
 }
-
-// const dataFilePath = path.join(process.cwd(), 'db/data.json');
-
-// const jsonData = await fsPromises.readFile(dataFilePath);
-// const objectData = JSON.parse(jsonData);
-
-// console.log(objectData);
-
-// const newData = {
-//   Name: "Ermina",
-//   ID: 2
-// };
-
-// objectData.push(newData)
-
-// const updatedData = JSON.stringify(objectData);
-
-// await fsPromises.writeFile(dataFilePath, updatedData);

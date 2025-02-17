@@ -78,7 +78,7 @@ const HomePage = () => {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          height: "700px",
+          height: "80%",
           width: "100%",
         }}
       >

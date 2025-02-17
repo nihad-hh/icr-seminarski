@@ -64,7 +64,7 @@ const HomePage = () => {
   return (
     <>
       <Link href="/korisnik">
-        <button className="my-5 btn btn-warning">Nazad</button>
+        <button className="my-5 btn btn-warning mx-4">Nazad</button>
       </Link>
       <div
         style={{
@@ -72,7 +72,7 @@ const HomePage = () => {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          height: "700px",
+          maxHeight: "80%",
           width: "100%",
         }}
       >
