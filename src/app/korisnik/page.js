@@ -558,7 +558,7 @@ export default function Home() {
 
               <div className="w-full flex justify-center">
                 <button
-                  className="my-5 mx-3 btn btn-success"
+                  className="my-5 mx-3 btn btn-warning"
                   onClick={() => {
                     handleOdabirPlacanja("gotovina");
                   }}
@@ -580,7 +580,7 @@ export default function Home() {
                 )}
 
                 <button
-                  className="my-5 mx-3 btn btn-info"
+                  className="my-5 mx-3 btn btn-warning"
                   onClick={() => {
                     handleOdabirPlacanja("kartica");
                   }}
