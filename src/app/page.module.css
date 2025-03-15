@@ -14,8 +14,11 @@
   padding: 80px;
   gap: 64px;
   font-family: var(--font-geist-sans);
+<<<<<<< HEAD
 
   height: 300px;
+=======
+>>>>>>> de98ffb (Initial commit from Create Next App)
 }
 
 @media (prefers-color-scheme: dark) {
