@@ -18,8 +18,8 @@ export default function About() {
         vožnje u realnom vremenu i ocjenjivanje usluga, nastojimo poboljšati
         vaše iskustvo putovanja svaki dan.
       </p>
-      <div className="flex justify-center">
-        <Image src="/taxi_slika.png" width={300} height={300} />
+      <div className="flex justify-center items-center">
+        <img src="/taxi_slika.png" alt="Logo" className="h-40 w-auto" />
       </div>
     </>
   );

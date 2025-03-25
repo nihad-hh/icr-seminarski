@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="navbar-start">
         <div className="dropdown">
           <details className="dropdown">
-            <summary className="btn m-1"> {/*Ovdje dodaj za boju navigacijske kutije*/}
+            <summary className="btn m-1 bg-white"> {/*Ovdje dodaj za boju navigacijske kutije*/}
               {" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"

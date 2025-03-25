@@ -130,11 +130,13 @@ export default function Home() {
       setBrojKarticeValid(true);
     }
 
-    if (isNaN(new Date(datumIsteka))) {
-      setDatumIstekaValid(false);
+    const regex = /^(\d{2})\/(\d{2})$/;
+
+    if (!regex.test(datumIsteka)) {
+      setDatumIstekaValid(false); // Invalid format
       return;
     } else {
-      setDatumIstekaValid(true);
+      setDatumIstekaValid(true); // Valid format
     }
 
     if (cvc.length !== 3) {
@@ -307,9 +309,16 @@ export default function Home() {
                 pathname: "/korisnik/odrediste",
               }}
             >
-              <button className="my-4 btn btn-warning ">Promijeni</button>
+              <button className="my-4">Promijeni</button>
             </Link>
           )}
+        </div>
+      )}
+      {stanje == 2 && tipVoznje == "Odmah" && (
+        <div className="w-full flex justify-center">
+          <button className="mt-4 error-button" onClick={stateToZero}>
+            Otkaži taxi
+          </button>
         </div>
       )}
       {/* Dijeljenje vožnje */}
@@ -386,67 +395,73 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="w-full flex justify-center p-4">
+      <div className="w-full h-full flex items-center justify-center">
+      <div className="grid grid-cols-2 gap-4 p-4 items-center">
         {(stanje == 1 || stanje == 1.5) && (
-          <div className="flex items-center space-x-4 mr-10 mb-4"> {/* Added mb-4 here */}
-            <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
+          <div className="flex items-center space-x-4">
+            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
               Dijeljenje:
             </span>
-            <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800">
+            <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
               {dijeljenjeVoznje}
             </span>
           </div>
         )}
         {(stanje == 1 || stanje == 1.5) && (
           <div className="flex items-center space-x-4">
-            <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
+            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
               Tip:
             </span>
-            <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800">
+            <span className="px-4 py-2 rounded min-w-20 text-white bg-gray-800 flex items-center justify-center">
               {tipVoznje}
             </span>
           </div>
         )}
       </div>
-      {/* date picker */}
-      {tipVoznje === "Rezervacija" && (
-        <>
-          <div className="w-full flex pl-[180px] z-10">
-            <div className="flex space-x-4 p-4">
-              <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
-                Datum:
-              </span>
-              <DatePicker
-                className="bg-yellow"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                disabled={stanje != 0}
-                customInput={
-                  <ExampleCustomInput className="example-custom-input" />
-                }
-              />
-            </div>
-          </div>
-          <div className="w-full flex pl-[180px]">
-            <div className="flex space-x-4 p-4">
-              <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
-                Vrijeme:
-              </span>
-              <input
-                disabled={stanje != 0}
-                className="bg-gray-800 text-white"
-                aria-label="Time"
-                type="time"
-                value={vrijeme}
-                onChange={(event) => {
-                  console.log(event.target.value);
-                  setVrijeme(event.target.value);
-                }}
-              />
-            </div>
-          </div>
-        </>
-      )}
+    </div>
+
+
+      {/* Date Picker */}
+{tipVoznje === "Rezervacija" && (
+  <>
+    <div className="w-full flex pl-[190px] z-10 mt-0"> {/* Reduced margin-top */}
+      <div className="flex space-x-4 p-2"> {/* Reduced padding */}
+        <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
+          Datum:
+        </span>
+        <DatePicker
+          className="bg-yellow"
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          disabled={stanje != 0}
+          customInput={
+            <ExampleCustomInput className="example-custom-input" />
+          }
+        />
+      </div>
+    </div>
+    <div className="w-full flex pl-[190px] mt-2"> {/* Reduced margin-top */}
+      <div className="flex space-x-4 p-2"> {/* Reduced padding */}
+        <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+          Vrijeme:
+        </span>
+        <input
+          disabled={stanje != 0}
+          className="bg-gray-800 text-white"
+          aria-label="Time"
+          type="time"
+          value={vrijeme}
+          onChange={(event) => {
+            console.log(event.target.value);
+            setVrijeme(event.target.value);
+          }}
+        />
+      </div>
+    </div>
+  </>
+)}
+
+
       {/* Status taxija */}
       {(stanje == 2 || stanje == 1.5 || stanje == 1) && (
         <>
@@ -499,10 +514,10 @@ export default function Home() {
       {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
         <div className="w-full flex px-10">
           <div className="flex space-x-4 p-2">
-            <span className="text-yellow-500 px-4 py-2 rounded bg-gray-800">
+            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
               Procijenjeno vrijeme dolaska:
             </span>
-            <span className="text-yellow-500 border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
+            <span className="text-yellow-400 border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
               5 minuta
             </span>
           </div>
@@ -512,10 +527,10 @@ export default function Home() {
       {(stanje == 2 || stanje == 1.5) && tipVoznje == "Odmah" && (
         <div className="w-full flex justify-center">
           <div className="flex space-x-4 p-4">
-            <span className="text-yellow-500 px-4 py-2 rounded bg-gray-800">
+            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
               Procijenjeno vrijeme do odredišta:
             </span>
-            <span className="text-yellow-500 border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
+            <span className="text-yellow-400 border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
               20 minuta
             </span>
           </div>
@@ -548,7 +563,7 @@ export default function Home() {
       {/* Prihvati voznju konačno*/}
       {stanje == 1.5 && (
         <>
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center space-x-10">
             <div
               className="my-4 tooltip tooltip-open tooltip-error tooltip-bottom z-0"
               data-tip="Prihvatanje vožnje plaćate sa 2 kredita"
@@ -565,28 +580,34 @@ export default function Home() {
       )}
       {/* Trenutna lokacija taxija button */}
       {stanje == 2 && tipVoznje == "Odmah" && (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center items-center">
           <Link href="/korisnik/taxi-trenutna-lokacija">
-            <button className="my-5 btn btn-warning ">
-              Trenutna lokacija taxija
+            <button className="my-5 flex items-center space-x-2 bg-[#fcd34d] text-[#212121] px-4 py-2 rounded cursor-pointer font-bold transition-all duration-300 ease-in-out">
+              <span>Trenutna lokacija taxija</span>
             </button>
           </Link>
+          {/* Add Taxi Logo next to the button */}
+          <img
+            src="/taxi_slika.png"  // Replace with the actual path to your logo
+            alt="Taxi Logo"
+            className="h-20 w-20 ml-2"  // Ensure the logo size matches the button height
+          />
         </div>
       )}
+
+
       {/* Zavrsi voznju i odabir placanja */}
       {stanje == 2 && tipVoznje == "Odmah" && (
         <>
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center space-x-10">
             <button
-              className="my-5 btn btn-warning"
+              className="my-5"
               onClick={() => document.getElementById("my_modal_3").showModal()}
             >
               Završi vožnju
             </button>
-            <button className="mx-5 my-5 btn btn-error " onClick={stateToZero}>
-              Otkaži taxi
-            </button>
           </div>
+
           <dialog id="my_modal_3" className="modal ">
             <div className="modal-box w-[450px]">
               <form method="dialog">
@@ -638,7 +659,7 @@ export default function Home() {
       {stanje == 2 && tipVoznje == "Rezervacija" && (
         <div className="w-full flex justify-center">
           <Link href="/korisnik">
-            <button className="my-5 btn btn-warning" onClick={handlePovratak}>
+            <button className="my-5" onClick={handlePovratak}>
               Povratak na glavni ekran
             </button>
           </Link>
@@ -647,13 +668,13 @@ export default function Home() {
       {/* Feedback */}
       {stanje == 3 && (
         <>
-          <div className="w-full flex justify-center my-4">
+          <div className="w-full flex justify-center text-white" style={{ marginTop: '2cm'}}>
             <h1>Hvala što ste koristili JaBiHTaxi!</h1>
           </div>
-          <div className="w-full flex justify-center my-4">
+          <div className="w-full flex justify-center text-white">
             Ocijenite vaše iskustvo:
           </div>
-          <div className="w-full flex justify-center my-4">
+          <div className="w-full flex justify-center">
             <ReactStars count={5} size={24} color2={"#ffd700"} />
           </div>
         </>
@@ -666,85 +687,88 @@ export default function Home() {
       )}
       {/* Plaćanje karticom */}
       {stanje == 3 && odabirPlacanja == "kartica" && (
-        <>
-          <div className="w-full flex justify-center flex-col">
-            <div className="flex space-x-4 p-4">
-              <span className="bg-black text-yellow-500 px-4 py-2 rounded w-32">
-                Broj kartice:
-              </span>
-              <span className="">
-                <input
-                  type="text"
-                  placeholder="Unesi ovdje"
-                  className="input input-bordered input-warning w-full max-w-xs"
-                  value={brojKartice}
-                  onChange={(event) => handleInput(event, setBrojKartice)}
-                />
-              </span>
-            </div>
-            {!brojKarticeValid && (
-              <div className="flex space-x-4 px-24">
-                <span className="text-red-500">
-                  Molimo unesite ispravan broj kartice. (9 brojeva)
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="w-full flex justify-center flex-col">
-            <div className="flex space-x-4 p-4">
-              <span className="bg-black text-yellow-500 px-4 py-2 rounded w-32">
-                Datum isteka:
-              </span>
-              <span className="">
-                <input
-                  type="text"
-                  placeholder="Unesi ovdje"
-                  className="input input-bordered input-warning w-full max-w-xs"
-                  value={datumIsteka}
-                  onChange={(event) => handleInput(event, setDatumIsteka)}
-                />
-              </span>
-            </div>
-            {!datumIstekaValid && (
-              <div className="flex space-x-4 px-24">
-                <span className="text-red-500">
-                  Molimo unesite ispravan datum isteka. (YYYY/MM/DD format)
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="w-full flex justify-center flex-col">
-            <div className="flex space-x-4 p-4">
-              <span className="bg-black text-yellow-500 px-4 py-2 rounded w-32">
-                CVC:
-              </span>
-              <span className="">
-                <input
-                  type="text"
-                  placeholder="Unesi ovdje"
-                  className="input input-bordered input-warning w-full max-w-xs"
-                  value={cvc}
-                  onChange={(event) => handleInput(event, setCvc)}
-                />
-              </span>
-            </div>
-            {!cvcValid && (
-              <div className="flex space-x-4 px-24">
-                <span className="text-red-500">
-                  Molimo unesite ispravan CVC. (3 broja)
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="w-full flex justify-center">
-            <Link href="/korisnik">
-              <button className="my-5 btn btn-warning" onClick={handlePlacanje}>
-                Uplati
-              </button>
-            </Link>
-          </div>
-        </>
+  <>
+    {/* Center the entire section */}
+    <div className="w-full flex justify-center flex-col items-center">
+      {/* Card Number */}
+      <div className="flex space-x-4 p-4 items-center">
+        <span className="bg-black text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
+          Broj kartice:
+        </span>
+        <input
+          type="text"
+          placeholder="XXXXXXXXX"
+          className="input input-bordered input-warning w-40 text-center"
+          value={brojKartice}
+          onChange={(event) => handleInput(event, setBrojKartice)}
+        />
+      </div>
+      {!brojKarticeValid && (
+        <div className="flex space-x-4 px-24">
+          <span className="text-red-500">
+            Molimo unesite ispravan broj kartice. (9 brojeva)
+          </span>
+        </div>
       )}
+    </div>
+
+    {/* Expiry Date */}
+    <div className="w-full flex justify-center flex-col items-center">
+      <div className="flex space-x-4 p-4 items-center">
+        <span className="text-yellow-400 px-4 py-2 rounded w-35 bg-gray-800">
+          Datum isteka:
+        </span>
+        <input
+          type="text"
+          placeholder="YY/MM"
+          className="input input-bordered input-warning w-40 text-center"
+          value={datumIsteka}
+          onChange={(event) => handleInput(event, setDatumIsteka)}
+        />
+      </div>
+      {!datumIstekaValid && (
+        <div className="flex space-x-4 px-24">
+          <span className="text-red-500">
+            Molimo unesite ispravan datum isteka. (YY/MM format)
+          </span>
+        </div>
+      )}
+    </div>
+
+    {/* CVC */}
+    <div className="w-full flex justify-center flex-col items-center">
+      <div className="flex space-x-4 p-4 items-center">
+        <span className="text-yellow-400 px-4 py-2 rounded w-18 bg-gray-800">
+          CVC:
+        </span>
+        <input
+          type="text"
+          placeholder="XXX"
+          className="input input-bordered input-warning w-20 text-center"
+          value={cvc}
+          onChange={(event) => handleInput(event, setCvc)}
+        />
+      </div>
+      {!cvcValid && (
+        <div className="flex space-x-4 px-24">
+          <span className="text-red-500">
+            Molimo unesite ispravan CVC. (3 broja)
+          </span>
+        </div>
+      )}
+    </div>
+
+    {/* Payment Button */}
+    <div className="w-full flex justify-center">
+      <Link href="/korisnik">
+        <button className="my-5" onClick={handlePlacanje}>
+          Uplati
+        </button>
+      </Link>
+    </div>
+  </>
+)}
+
       {/* Plaćanje gotovinom ili kreditima */}
       {stanje == 3 &&
         (odabirPlacanja == "gotovina" || odabirPlacanja == "krediti") && (
@@ -752,7 +776,7 @@ export default function Home() {
             <div className="w-full flex justify-center">
               <Link href="/korisnik">
                 <button
-                  className="my-5 btn btn-warning"
+                  className="my-5"
                   onClick={handlePovratak}
                 >
                   Povratak na glavni ekran

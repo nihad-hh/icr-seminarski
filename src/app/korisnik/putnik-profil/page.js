@@ -66,9 +66,9 @@ export default function PutnikProfil() {
                 ✕
               </button>
             </form>
-            <div className="w-full flex justify-center flex-col">
+            <div className="w-full flex justify-center flex-col text-gray-400">
               <table className="table table-pin-rows z-0 my-6">
-                <thead>
+                <thead className="text-gray-500">
                   <tr>
                     <th>Datum i vrijeme</th>
                     <th>Polazište</th>
@@ -107,7 +107,7 @@ export default function PutnikProfil() {
     <div>
       <Navbar />
       <div className="w-full flex justify-center">
-        <div className="flex space-x-4 px-4 py-6 text-yellow-500">
+        <div className="flex space-x-4 px-4 py-6 text-yellow-400">
           <svg
             class="w-6 h-6 text-gray-800 dark:text-white"
             aria-hidden="true"
@@ -127,11 +127,11 @@ export default function PutnikProfil() {
           </svg>
           <p>{ime} </p>
         </div>
-        <div className="flex space-x-4 py-4">
-          <span className="bg-black text-yellow-500 px-4 py-2 rounded">
+        <div className="flex space-x-2 py-4 ml-20">
+          <span className="bg-gray-900 text-yellow-400 py-2 rounded">
             Krediti:
           </span>
-          <span className="border-2 border-yellow-500 px-4 py-2 rounded">
+          <span className="bg-gray-900 text-yellow-400 py-2 rounded mr-10">
             {krediti} KM
           </span>
           <Link
@@ -139,22 +139,19 @@ export default function PutnikProfil() {
               pathname: "/korisnik/uplati",
             }}
           >
-            <button className="btn btn-warning ">Uplati</button>
+            <button className="ml-2">Uplati</button>
           </Link>
         </div>
       </div>
-
-      <div className="flex w-full flex-col h-6">
-        <div className="divider"></div>
-      </div>
-
-      <h1 className="h-10 m-5 text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-        Prethodno završene vožnje:
-      </h1>
-      <div className="max-h-56 overflow-auto">
-        <table className="table table-pin-rows z-0">
+      <hr class="border-t-4 border-gray-200 my-0" />
+    
+      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+        <table className="table table-pin-rows z-0 text-white">
+          <caption className="text-yellow-400 text-lg font-bold p-2">
+            Prethodno završene vožnje
+          </caption>
           <thead>
-            <tr>
+            <tr className="bg-gray-200">
               <th>Datum i vrijeme</th>
               <th>Polazište</th>
               <th>Odredište</th>
@@ -164,23 +161,31 @@ export default function PutnikProfil() {
           {zavrseneVoznjeJSX}
         </table>
       </div>
-      <h1 className="h-10 m-5 text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-        Rezervisane vožnje:
-      </h1>
-      <div className="max-h-56 overflow-auto">
-        <table id="tRezervisaneVoznje" className="table table-pin-rows">
-          <thead>
-            <tr>
-              <th>Datum i vrijeme</th>
-              <th>Polazište</th>
-              <th>Odredište</th>
-              <th>Cijena</th>
-              <th>Otkaži</th>
-            </tr>
-          </thead>
-          {rezervisaneVoznjeJSX}
-        </table>
-      </div>
+
+
+<hr class="border-t-4 border-gray-200 my-0" />
+      
+      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+  <table id="tRezervisaneVoznje" className="table table-pin-rows text-white">
+    <caption className="text-yellow-400 text-lg font-bold p-2">
+      Rezervisane vožnje
+    </caption>
+    <thead>
+      <tr className="bg-gray-200">
+        <th>Datum i vrijeme</th>
+        <th>Polazište</th>
+        <th>Odredište</th>
+        <th>Cijena</th>
+        <th>Otkaži</th>
+      </tr>
+    </thead>
+    {rezervisaneVoznjeJSX}
+  </table>
+</div>
+<hr class="border-t-4 border-gray-200 my-0" />
+<div className="flex justify-center items-center">
+  <img src="/taxi_slika.png" alt="Logo" className="h-28 w-auto" />
+</div>
     </div>
   );
 }

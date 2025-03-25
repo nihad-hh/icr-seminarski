@@ -138,7 +138,7 @@ export default function Home() {
               </svg>
               <input
                 type="text"
-                className="grow "
+                className="grow text-white bg-gray-800"
                 placeholder="Email"
                 value={email}
                 onChange={(event) => handleInput(event, setEmail)}
@@ -162,7 +162,7 @@ export default function Home() {
               </svg>
               <input
                 type="text"
-                className="grow"
+                className="grow text-white bg-gray-800"
                 placeholder="Korisničko ime"
                 value={username}
                 onChange={(event) => handleInput(event, setUsername)}
@@ -190,7 +190,7 @@ export default function Home() {
               </svg>
               <input
                 type={isVisible ? "text" : "password"}
-                className="grow"
+                className="grow text-white bg-gray-800"
                 value={password}
                 placeholder="Lozinka"
                 onChange={(event) => handleInput(event, setPassword)}

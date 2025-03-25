@@ -38,7 +38,7 @@ export default function PutnikProfil() {
               <td>{row.polaziste}</td>
               <td>{row.odrediste}</td>
               <button
-                className="my-5 btn btn-warning"
+                className="my-3"
                 onClick={() =>
                   document.getElementById("my_modal_3").showModal()
                 }
@@ -56,9 +56,9 @@ export default function PutnikProfil() {
                 ✕
               </button>
             </form>
-            <div className="w-full flex justify-center flex-col">
+            <div className="w-full flex justify-center flex-col text-gray-400">
               <table className="table table-pin-rows z-0 my-6">
-                <thead>
+                <thead className="text-gray-500">
                   <tr>
                     <th>Datum i vrijeme</th>
                     <th>Polazište</th>
@@ -134,9 +134,9 @@ export default function PutnikProfil() {
                 ✕
               </button>
             </form>
-            <div className="w-full flex justify-center flex-col">
+            <div className="w-full flex justify-center flex-col text-gray-400">
               <table className="table table-pin-rows z-0 my-6">
-                <thead>
+                <thead className="text-gray-500">
                   <tr>
                     <th>Datum i vrijeme</th>
                     <th>Polazište</th>
@@ -264,61 +264,66 @@ export default function PutnikProfil() {
         <div className="divider"></div>
       </div>
       <div className="w-full flex justify-center"></div>
+      
+      <hr class="border-t-4 border-gray-200 my-0" />
 
-      <h1 className="h-10 m-5 text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded z-0">
-        Dostupne vožnje
-      </h1>
-      <div className="max-h-56 overflow-auto z-0">
-        <table className="table table-pin-rows z-0">
+      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+        <table className="table table-pin-rows z-0 text-white">
+          <caption className="text-yellow-400 text-lg font-bold p-2">
+            Dostupne vožnje
+          </caption>
           <thead>
-            <tr>
-              <th>Datum i vrijeme</th>
-              <th>Polazište</th>
-              <th>Odredište</th>
-              <th>Akcija</th>
+            <tr className="bg-gray-200 text-gray-500">
+              <th className="text-center">Datum i vrijeme</th>
+              <th className="text-center">Polazište</th>
+              <th className="text-center">Odredište</th>
+              <th className="text-center">Akcija</th>
             </tr>
           </thead>
           {dostupneVoznjeJSX}
         </table>
-      </div>
+      </div> 
+      
+      <hr class="border-t-4 border-gray-200 my-0" />
 
-      <h1 className="h-10 m-5 text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-        Rezervisane vožnje
-      </h1>
-      <div className="max-h-56 overflow-auto ">
-        <table className="table table-pin-rows">
-          <thead className="">
-            <tr>
-              <th className="w-[5px]">
-                Datum <br /> Vrijeme
-              </th>
-              <th>Polazište</th>
-              <th>Odredište</th>
-              <th>Cijena</th>
-              <th className="w-[40px]">Otkaži</th>
-              <th></th>
+      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+        <table className="table table-pin-rows z-0 text-white">
+          <caption className="text-yellow-400 text-lg font-bold p-2">
+            Rezervisane vožnje
+          </caption>
+          <thead>
+            <tr className="bg-gray-200 text-gray-500">
+              <th className="text-center">Datum i vrijeme</th>
+              <th className="text-center">Polazište</th>
+              <th className="text-center">Odredište</th>
+              <th className="text-center">Cijena</th>
+              <th className="w-[40px] text-center">Otkaži</th>
             </tr>
           </thead>
           {rezervisaneVoznjeJSX}
         </table>
       </div>
 
-      <h1 className="h-10 m-5 text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-        Završene vožnje
-      </h1>
-      <div className="max-h-56 overflow-auto">
-        <table className="table table-pin-rows">
+      <hr class="border-t-4 border-gray-200 my-0" />
+
+      <div className="overflow-auto" style={{ maxHeight: '276px' }}>
+        <table className="table table-pin-rows z-0 text-white">
+          <caption className="text-yellow-400 text-lg font-bold p-2">
+            Završene vožnje
+          </caption>
           <thead>
-            <tr>
-              <th>Datum i vrijeme</th>
-              <th>Polazište</th>
-              <th>Odredište</th>
-              <th>Cijena</th>
+            <tr className="bg-gray-200 text-gray-500">
+              <th className="text-center">Datum i vrijeme</th>
+              <th className="text-center">Polazište</th>
+              <th className="text-center">Odredište</th>
+              <th className="text-center">Cijena</th>
             </tr>
           </thead>
           {zavrseneVoznjeJSX}
         </table>
       </div>
+
+      <hr class="border-t-4 border-gray-200 my-0" />
     </div>
   );
 }

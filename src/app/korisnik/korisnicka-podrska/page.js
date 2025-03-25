@@ -25,7 +25,7 @@ export default function Home() {
       {/* Feedback */}{" "}
       <>
         <div className="w-full flex justify-center my-4">
-          <span className="text-yellow-500 px-2 py-2 rounded">
+          <span className="text-yellow-400 px-2 py-2 rounded">
             Želim da podijelim:
           </span>
           <select
@@ -41,7 +41,7 @@ export default function Home() {
         </div>
       </>
       <div className="w-full flex justify-start my-4 mx-2">
-        <span className="text-yellow-500 px-2 py-2 rounded">Tekst:</span>
+        <span className="text-yellow-400 px-2 py-2 rounded">Tekst:</span>
       </div>
       <div className="flex min-w-[480px] flex-col mx-2">
         <textarea
@@ -58,7 +58,7 @@ export default function Home() {
                 : "/korisnik"
             }
           >
-            <button className="my-5 btn btn-warning">Pošalji poruku</button>
+            <button className="my-5">Pošalji poruku</button>
           </Link>
         </div>
       </>

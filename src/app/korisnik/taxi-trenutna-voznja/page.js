@@ -28,31 +28,32 @@ export default function Home() {
     <>
       <Navbar />
       {/* Adresa polazišta */}
-      <div className="w-full flex justify-center">
-        <div className="flex space-x-4 p-4">
-          <span className="bg-black text-yellow-500 px-4 py-2 rounded">
+      <div className="w-full flex justify-start" style={{ marginTop: '1cm', marginLeft: '70px' }}>
+        <div className="flex space-x-4 p-3">
+          <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
             Adresa polazišta:
           </span>
-          <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32 text-yellow-500">
+          <span className="px-4 py-2 rounded min-w-32 text-white bg-gray-800">
             {loadData("polaziste")}
           </span>
         </div>
       </div>
+
       {/* Adresa odredišta */}
-      <div className="w-full flex justify-center">
-        <div className="flex space-x-4 p-4">
-          <span className="bg-black text-yellow-500 px-4 py-2 rounded">
+      <div className="w-full flex justify-start" style={{marginLeft: '70px' }}>
+        <div className="flex space-x-4 p-3">
+          <span className="bg-black text-yellow-400 px-4 py-2 rounded bg-gray-800">
             Adresa odredišta:
           </span>
-          <span className="border-2 border-yellow-500 px-4 py-2 rounded min-w-32 text-yellow-500">
+          <span className="px-4 py-2 rounded min-w-32 max-w-48 text-wrap text-white bg-gray-800">
             {loadData("odrediste")}
           </span>
         </div>
       </div>
       {/* dijeljenje voznje */}
-      <div className="w-full flex justify-center">
-        <div className="flex space-x-4 p-4">
-          <span className="bg-black text-yellow-500 px-4 py-2 rounded">
+      <div className="w-full flex justify-start" style={{marginLeft: '70px' }}>
+        <div className="flex space-x-4 p-3">
+          <span className="bg-gray-800 text-yellow-400 px-4 py-2 rounded">
             Dijeljenje vožnje:
           </span>
 
@@ -64,7 +65,7 @@ export default function Home() {
             disabled={true}
             defaultChecked
           />
-          <label className="text-yellow-500" htmlFor="Ne">
+          <label className="text-yellow-400" htmlFor="Ne">
             Ne
           </label>
           <input
@@ -74,52 +75,52 @@ export default function Home() {
             className="radio radio-warning"
             disabled={true}
           />
-          <label className="text-yellow-500" htmlFor="Da">
+          <label className="text-yellow-400" htmlFor="Da">
             Da
           </label>
         </div>
       </div>
       {/* Procijenjeno vrijeme dolaska taxija */}
-      <div className="w-full flex justify-center">
-        <div className="flex space-x-2 p-2">
-          <span className="bg-black text-yellow-500 px-4 py-2 rounded">
-            Procijenjeno vrijeme dolaska:
-          </span>
-          <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-            5 minuta
-          </span>
+      <div className="w-full flex justify-start mt-4" style={{marginLeft: '40px' }}>
+          <div className="flex space-x-4 p-3">
+            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+              Procijenjeno vrijeme dolaska:
+            </span>
+            <span className="text-yellow-400 border-1 border-yellow-500 px-4 py-2 rounded bg-gray-800">
+              5 minuta
+            </span>
+          </div>
         </div>
-      </div>
       {/* Procijenjeno vrijeme do odredišta */}
-      <div className="w-full flex justify-center">
-        <div className="flex space-x-4 p-4">
-          <span className="bg-black text-yellow-500 px-4 py-2 rounded">
-            Procijenjeno vrijeme do odredišta:
-          </span>
-          <span className="text-yellow-500 border-2 border-yellow-500 px-4 py-2 rounded">
-            20 minuta
-          </span>
+      <div className="w-full flex justify-start" style={{marginLeft: '40px' }}>
+          <div className="flex space-x-4 p-3">
+            <span className="text-yellow-400 px-4 py-2 rounded bg-gray-800">
+              Procijenjeno vrijeme do odredišta:
+            </span>
+            <span className="text-yellow-400 border-1 border-yellow-400 px-4 py-2 rounded bg-gray-800">
+              20 minuta
+            </span>
+          </div>
         </div>
-      </div>
       {/* Otkazi voznju */}
       <>
         <Link href="/taxi">
-          <div className="w-full flex justify-center">
-            <button className="my-5 btn btn-error ">Otkaži vožnju</button>
+          <div className="w-full flex justify-center mt-4">
+            <button className="my-4 error-button">Otkaži vožnju</button>
           </div>
         </Link>
       </>
       {/* Trenutna lokacija taxija button */}
       <div className="w-full flex justify-center">
         <Link href="/korisnik/pokazi-voznju">
-          <button className="my-5 btn btn-warning ">Pokaži lokaciju</button>
+          <button className="my-4">Pokaži lokaciju</button>
         </Link>
       </div>
       {/* Zavrsi voznju i odabir placanja */}
       <>
         <div className="w-full flex justify-center">
           <Link href="/korisnik/taxi-feedback">
-            <button className="my-5 btn btn-warning">Završi vožnju</button>
+            <button className="my-4">Završi vožnju</button>
           </Link>
         </div>
       </>

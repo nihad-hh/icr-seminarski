@@ -18,10 +18,10 @@ export default function Home() {
       <Navbar />
       {/* Feedback */}{" "}
       <>
-        <div className="w-full flex justify-center my-4">
+        <div className="w-full flex justify-center my-4 text-white" style={{ marginTop: '4cm'}}>
           <h1>Hvala što ste koristili JaBiHTaxi!</h1>
         </div>
-        <div className="w-full flex justify-center my-4">
+        <div className="w-full flex justify-center my-4 text-white">
           Ocijenite vaše iskustvo:
         </div>
         <div className="w-full flex justify-center my-4">
@@ -35,7 +35,7 @@ export default function Home() {
       <>
         <div className="w-full flex justify-center">
           <Link href="/taxi">
-            <button className="my-5 btn btn-warning">
+            <button className="my-5">
               Povratak na glavni ekran
             </button>
           </Link>
